@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Alherrero | Ciberseguridad</title>
+    <!-- Carga de Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Carga de la fuente Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <link rel="icon" href="perfil.jpg" type="image/x-icon">
+    <meta name="color-scheme" content="dark" />
+    <meta name="google-site-verification" content="bYF5zd8Gzidf5AA2J1B78a0XT1d_jDI-11w8WnplglY" />
+    <link rel="stylesheet" href="styless.css">
+
+    <style>
+        /* Custom Variables for Minimalist Dark Theme */
+        :root {
+            --color-bg-primary: #0A0A0A;
+            /* Negro profundo para el minimalismo */
+            --color-bg-secondary: #1F1F24;
+            /* Fondo de tarjetas */
+            --color-border: #2D2D35;
+            /* Borde sutil */
+            --color-accent: #DC2626;
+            /* Rojo intenso (red-600) */
+        }
+
+        /* Preservar las esquinas cuadradas */
+        * {
+            border-radius: 0 !important;
+        }
+
+        body {
+            color: #e5e7eb;
+            background: var(--color-bg-primary);
+            font-family: 'Inter', sans-serif;
+            background-image: none;
+            background-attachment: fixed;
+        }
+
+        /* Encabezado minimalista, sin blur ni sombra */
+        .header-float {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            background-color: var(--color-bg-primary);
+            border-bottom: 1px solid var(--color-border);
+            box-shadow: none;
+            transition: all 0.2s ease;
+        }
+
+        input {
+            border: 1px solid var(--color-border) !important;
+            background: var(--color-bg-secondary) !important;
+            transition: all .2s ease;
+        }
+
+        input:focus {
+            border-color: var(--color-accent) !important;
+            box-shadow: 0 0 0 1px var(--color-accent) !important;
+        }
+
+        /* Estilo de tarjeta minimalista, sin sombras ni elevación */
+        .card {
+            background: var(--color-bg-secondary);
+            border: 1px solid var(--color-border);
+            box-shadow: none;
+            transition: border-color 0.2s, background-color 0.2s;
+        }
+
+        .card:hover {
+            transform: none;
+            border-color: var(--color-accent);
+            box-shadow: none;
+        }
+
+        /* 1. Modificación: Estilo de botón de navegación minimalista (sin fondo ni borde) */
+        .tab-btn {
+            position: relative;
+            padding-bottom: 0.5rem;
+            color: #9ca3af;
+            font-weight: 500;
+            transition: color 0.2s ease;
+            text-shadow: none;
+            /* Eliminamos los fondos y bordes del botón */
+            background: transparent !important;
+            border: none !important;
+            padding-left: 0.5rem;
+            /* Ajustar padding si es necesario */
+            padding-right: 0.5rem;
+            /* Ajustar padding si es necesario */
+        }
+
+        .tab-btn:hover {
+            color: #fff;
+        }
+
+        .tab-btn.active {
+            color: #fff;
+        }
+
+        .tab-btn.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--color-accent);
+            animation: underline-grow 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+
+        @keyframes underline-grow {
+            from {
+                transform: scaleX(0);
+            }
+
+            to {
+                transform: scaleX(1);
+            }
+        }
+
+        /* Animación de entrada suave (simplificada) */
+        .fade-in-on-load {
+            opacity: 0;
+            animation: fade-in 0.5s ease-out 0.1s forwards;
+        }
+
+        @keyframes fade-in {
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* 2. Modificación: Estilo para los botones de filtro y paginación (más planos y ligeros) */
+        .filter-btn {
+            @apply px-4 py-2 text-sm font-medium transition duration-200 border border-transparent text-gray-400 bg-transparent;
+        }
+
+        .filter-btn:hover {
+            @apply text-white bg-neutral-900 border-neutral-700;
+            /* Fondo y borde más sutil en hover */
+        }
+
+        .filter-btn.active {
+            @apply text-white bg-red-700 border-red-800;
+            /* Fondo rojo sólido y borde más oscuro */
+            box-shadow: none;
+        }
+
+        /* Estilo para los botones de acción dentro de las cards (ej. "Usar herramienta") */
+        .card-action-btn {
+            @apply mt-auto block text-center py-2 bg-red-700 hover:bg-red-800 text-white font-semibold transition-colors;
+        }
+    </style>
+</head>
+
+<body class="min-h-screen flex flex-col">
+
+    <!-- HEADER: Minimalista y sin blur -->
+    <header class="header-float w-full px-6 py-4">
+        <div class="max-w-7xl mx-auto flex justify-between items-center flex-wrap gap-4">
+            <div class="flex items-center gap-4 fade-in-on-load">
+                <!-- Placeholder de imagen de perfil --><img src="perfil.jpg" alt="Perfil de Alherrero"
+                    class="w-16 h-16 border-2 border-red-600 object-cover p-0.5"
+                    onerror="this.onerror=null; this.src='https://placehold.co/64x64/DC2626/ffffff?text=K4';" />
+                <div>
+                    <!-- Título en rojo de acento -->
+                    <h1 class="text-4xl font-extrabold text-white">
+                        Alherrero
+                    </h1>
+                    <p class="text-gray-500 text-sm italic">Alejandro Herrero</p>
+                </div>
+            </div>
+
+            <!-- Navegación de escritorio -->
+            <nav class="hidden md:flex gap-8 text-lg fade-in-on-load" style="animation-delay: 0.2s;">
+                <button id="tab-posts" class="tab-btn active">Posts</button>
+                <button id="tab-tools" class="tab-btn">Mis herramientas</button>
+                <button id="tab-sobremi" class="tab-btn">Sobre mí</button>
+            </nav>
+
+            <div class="md:hidden">
+                <button id="menu-btn" class="text-gray-400 hover:text-white p-2">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16m-7 6h7"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- menú móvil -->
+        <div id="mobile-menu" class="hidden md:hidden mt-4">
+            <nav class="flex flex-col gap-4 text-lg items-center py-2 bg-black/50 border-t border-neutral-800">
+                <button id="tab-posts-mobile" class="tab-btn active">Posts</button>
+                <button id="tab-tools-mobile" class="tab-btn">Mis herramientas</button>
+                <button id="tab-sobremi-mobile" class="tab-btn">Sobre mí</button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- MAIN: Contenido con animación de entrada -->
+    <main class="flex-1 px-6 py-12 w-full max-w-7xl mx-auto">
+        <div id="content-wrapper" class="fade-in-on-load">
+            <!-- POSTS -->
+            <section id="posts-section" class="tab-content w-full">
+                <div id="posts-list-wrapper" class="w-full">
+                    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
+                        <h2 class="text-4xl font-bold tracking-tight">Blog posts</h2>
+                        <div class="relative w-full sm:w-64">
+                            <!-- Input con estilo minimalista --><input id="search-input" type="text"
+                                placeholder="Buscar..." class="w-full pl-10 pr-4 py-2 text-gray-200" />
+                            <svg class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 w-5 h-5"
+                                fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <!-- Botones de filtro minimalistas -->
+                    <div class="flex gap-3 mb-8">
+                        <button id="filter-all" class="filter-btn active" data-category="all">Todos</button>
+                        <button id="filter-posts" class="filter-btn" data-category="Post">Posts</button>
+                        <button id="filter-writeups" class="filter-btn" data-category="Writeup">Writeups</button>
+                    </div>
+
+                    <div id="posts-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <!-- MENSAJE DE CARGA / PLACEHOLDER INICIAL (Eliminado por blog.js al cargar) -->
+                        <div class="text-gray-500 col-span-full text-center p-8">Cargando publicaciones desde
+                            posts.json...</div>
+                    </div>
+
+                    <!-- Paginación minimalista -->
+                    <div id="pagination-controls" class="flex justify-center mt-12 gap-4 items-center">
+                        <button id="prev-page" class="filter-btn disabled:opacity-50 disabled:cursor-not-allowed"
+                            disabled>← Anterior</button>
+                        <span id="posts-page-indicator" class="text-gray-400 text-sm">Página 1 / 1</span>
+                        <button id="next-page" class="filter-btn disabled:opacity-50 disabled:cursor-not-allowed"
+                            disabled>Siguiente →</button>
+                    </div>
+                </div>
+                <div id="post-view" class="hidden flex-1 w-full"></div>
+            </section>
+
+            <!-- TOOLS -->
+            <section id="tools-section" class="tab-content hidden w-full">
+                <h2 class="text-4xl font-bold tracking-tight mb-8">Mis herramientas</h2>
+                <div id="tools-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- El contenido de tools se cargaría desde otra fuente si fuera necesario, o se define aquí -->
+                    <div class="card p-6 flex flex-col justify-between">
+                        <h3 class="text-2xl font-bold mb-2 text-white">Generador de Payloads</h3>
+                        <p class="text-gray-400 text-sm mb-4 line-clamp-3">
+                            Una utilidad para crear payloads de prueba en varios formatos (shell, reverse shell, etc.)
+                            para fines de pruebas de penetración.
+                        </p>
+                        <a href="#" class="card-action-btn">
+                            Usar herramienta
+                        </a>
+                    </div>
+                    <div class="card p-6 flex flex-col justify-between">
+                        <h3 class="text-2xl font-bold mb-2 text-white">Validador de Hashes</h3>
+                        <p class="text-gray-400 text-sm mb-4 line-clamp-3">
+                            Verifica la integridad de archivos comparando hashes SHA256 o MD5.
+                        </p>
+                        <a href="#" class="card-action-btn">
+                            Usar herramienta
+                        </a>
+                    </div>
+                </div>
+                <div id="tools-pagination-controls" class="flex justify-center mt-8 gap-4 items-center">
+                    <button id="prev-tool-page" class="filter-btn disabled:opacity-50 disabled:cursor-not-allowed"
+                        disabled>← Anterior</button>
+                    <span id="tools-page-indicator" class="text-gray-400 text-sm">Página 1 / 1</span>
+                    <button id="next-tool-page" class="filter-btn disabled:opacity-50 disabled:cursor-not-allowed"
+                        disabled>Siguiente →</button>
+                </div>
+            </section>
+
+            <!-- SOBRE MI -->
+            <section id="sobremi-section" class="tab-content hidden w-full">
+                <h2 class="text-4xl font-bold tracking-tight mb-8">Sobre mí</h2>
+                <div class="card p-10 text-center max-w-3xl mx-auto">
+                    <!-- Imagen de perfil grande y centrada --><img src="perfil.jpg" alt="Perfil de Alherrero"
+                        class="w-32 h-32 border-4 border-red-600 object-cover mx-auto mb-6"
+                        onerror="this.onerror=null; this.src='https://placehold.co/128x128/DC2626/ffffff?text=K4';" />
+                    <h2 class="text-3xl font-extrabold mb-1">Alejandro Herrero</h2>
+                    <p class="text-base text-gray-500 italic mb-6">Ciberseguridad y Hacking Ético</p>
+                    <p class="text-gray-300 text-lg mx-auto leading-relaxed">
+                        Soy Alejandro Herrero, un entusiasta de la ciberseguridad al que le gusta aprender algo nuevo
+                        cada día. Me centro principalmente en el pentesting web, teniendo experiencia reportando varias
+                        vulnerabilidades a una empresa. Trabajo con Windows y Linux y configuro máquinas virtuales
+                        Hago scripts en Python y uso tecnologías web básicas como HTML, CSS y JavaScript. Desarrollo
+                        proyectos personales constantemente para reforzar mis habilidades.
+                        Aprendo rápido, me adapto con facilidad a nuevos desafíos y siempre busco maneras de mejorar y
+                        crecer en el campo del pentesting.
+                    </p>
+                    <div class="flex justify-center gap-6 text-gray-400 mt-8">
+                        <!-- Enlaces de redes con microinteracción visual --><a href="https://github.com/Alherrero"
+                            target="_blank" class="hover:text-red-400 transition flex items-center gap-1">
+                            <!-- Placeholder para icono de GitHub --><svg class="w-6 h-6" viewBox="0 0 24 24"
+                                fill="currentColor">
+                                <path
+                                    d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.082-.733.085-.718.085-.718 1.198.085 1.838 1.227 1.838 1.227 1.062 1.835 2.77 1.305 3.432.999.108-.77.418-1.305.762-1.604-2.639-.297-5.404-1.325-5.404-5.879 0-1.305.465-2.381 1.235-3.221-.128-.302-.539-1.523.123-3.172 0 0 1.006-.322 3.3.084 1.133-.315 2.348-.472 3.564-.478 1.215.006 2.43.163 3.564.477 2.294-.406 3.3-.084 3.3-.084.662 1.649.251 2.87.123 3.172.77.84 1.235 1.916 1.235 3.221 0 4.562-2.768 5.584-5.418 5.867.433.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.562 21.82 24 17.324 24 12c0-6.627-5.373-12-12-12z" />
+                            </svg>
+                            GitHub
+                        </a>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- FOOTER: Estilo minimalista -->
+    <footer class="text-gray-700 text-center py-6 border-t border-neutral-900 mt-16 text-sm">
+        <p>&copy; 2025 Alherrero | Alejandro Herrero.</p>
+    </footer>
+
+    <!-- JS de Comportamiento (Lógica de pestañas y filtros visuales) -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Lógica de menú móvil
+            const menuBtn = document.getElementById('menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+
+            menuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            // Lógica de pestañas
+            const tabs = ['posts', 'tools', 'sobremi'];
+
+            tabs.forEach(tab => {
+                const desktopBtn = document.getElementById(`tab-${tab}`);
+                const mobileBtn = document.getElementById(`tab-${tab}-mobile`);
+                const section = document.getElementById(`${tab}-section`);
+
+                const handleTabClick = (event) => {
+                    // Si viene de un botón móvil, esconde el menú después de la selección
+                    if (event.target.id.endsWith('-mobile')) {
+                        mobileMenu.classList.add('hidden');
+                    }
+
+                    // Remover 'active' de todos los botones y ocultar secciones
+                    tabs.forEach(t => {
+                        document.getElementById(`tab-${t}`).classList.remove('active');
+                        const mobileTab = document.getElementById(`tab-${t}-mobile`);
+                        if (mobileTab) mobileTab.classList.remove('active');
+                        document.getElementById(`${t}-section`).classList.add('hidden');
+                    });
+
+                    // Activar el botón y mostrar la sección correspondiente
+                    desktopBtn.classList.add('active');
+                    if (mobileBtn) mobileBtn.classList.add('active');
+                    section.classList.remove('hidden');
+                };
+
+                desktopBtn.addEventListener('click', handleTabClick);
+                if (mobileBtn) mobileBtn.addEventListener('click', handleTabClick);
+            });
+
+            // Lógica de filtros (ejemplo visual, reemplazada por blog.js)
+            const filterBtns = document.querySelectorAll('#posts-list-wrapper button[data-category]');
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    filterBtns.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                });
+            });
+
+            // Asegura que el filtro inicial tenga la clase activa
+            document.getElementById('filter-all').classList.add('active');
+        });
+    </script>
+
+    <!-- ENLACE AL ARCHIVO DE LÓGICA DEL BLOG -->
+    <script src="./blog.js" type="module"></script>
+</body>
+
+</html>

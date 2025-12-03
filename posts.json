@@ -1,0 +1,40 @@
+[
+  {
+    "nombre": "Máquina Hotel (Easy)",
+    "descripcion": "Writeup de la máquina Hotel de la plataforma de HackMyVM.",
+    "ruta": "posts/hotel_writeup.md",
+    "tipo": "writeup",
+    "fecha": "20/11/2025",
+    "hora_lectura": "5 min"
+  },
+  {
+    "nombre": "Máquina Luz (Easy)",
+    "descripcion": "Writeup de la máquina Luz de la plataforma de HackMyVM.",
+    "ruta": "posts/luz_writeup.md",
+    "tipo": "writeup",
+    "fecha": "15/10/2025",
+    "hora_lectura": "7 min"
+  },
+  {
+    "nombre": "Máquina Lazzycorp (Easy)",
+    "descripcion": "Writeup de la máquina Lazzycorp de la plataforma de HackMyVM.",
+    "ruta": "posts/lazzycorp_writeup.md",
+    "tipo": "writeup",
+    "fecha": "28/09/2025",
+    "hora_lectura": "6 min"
+  },
+  {
+    "nombre": "Máquina Helpdesk (Easy)",
+    "descripcion": "Writeup de la máquina Helpdesk de la plataforma de HackMyVM.",
+    "ruta": "posts/helpdesk_writeup.md",
+    "tipo": "writeup",
+    "fecha": "10/09/2025",
+    "hora_lectura": "8 min"
+  },
+  {
+    "nombre": "WpKiller",
+    "descripcion": "WpKiller es una herramienta de enumeración para WordPress. Compatible con Linux y Windows y escrito en python",
+    "url": "https://github.com/Alherrero/WpKiller",
+    "tipo": "herramienta"
+  }
+]

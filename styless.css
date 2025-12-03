@@ -1,0 +1,142 @@
+/* Custom Variables for Minimalist Dark Theme */
+:root {
+    --color-bg-primary: #0A0A0A; /* Negro profundo para el minimalismo */
+    --color-bg-secondary: #1F1F24; /* Fondo de tarjetas */
+    --color-border-subtle: #333338; /* Borde gris sutil */
+    --color-text-primary: #E5E5E5; /* Texto principal blanco/gris claro */
+    --color-accent: #DC2626; /* Rojo para el acento (Red-600) */
+}
+
+body {
+    background-color: var(--color-bg-primary);
+    color: var(--color-text-primary);
+    font-family: 'Inter', sans-serif;
+}
+
+/* Estilos base para la tipografía dentro del contenido Markdown */
+/* Aplicados a la clase 'markdown-content' */
+.markdown-content h1,
+.markdown-content h2,
+.markdown-content h3 {
+    font-weight: 700;
+    margin-top: 1.5em;
+    margin-bottom: 0.5em;
+    color: var(--color-text-primary);
+}
+
+.markdown-content h1 {
+    font-size: 2em; /* 32px */
+    border-bottom: 1px solid var(--color-border-subtle);
+    padding-bottom: 0.3em;
+}
+
+.markdown-content h2 {
+    font-size: 1.5em; /* 24px */
+}
+
+.markdown-content h3 {
+    font-size: 1.25em; /* 20px */
+    color: #ccc;
+}
+
+.markdown-content p {
+    margin-bottom: 1em;
+    line-height: 1.65;
+    color: #a0a0a0; /* Gris más suave para el texto del cuerpo */
+}
+
+.markdown-content a {
+    color: var(--color-accent); /* Enlaces en rojo */
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.markdown-content a:hover {
+    color: #ef4444; /* Rojo más claro al pasar el ratón */
+    text-decoration: underline;
+}
+
+/* Estilos para listas */
+.markdown-content ul,
+.markdown-content ol {
+    margin-bottom: 1em;
+    padding-left: 2em;
+    color: #a0a0a0;
+}
+
+.markdown-content ul {
+    list-style-type: disc;
+}
+
+.markdown-content ol {
+    list-style-type: decimal;
+}
+
+.markdown-content li {
+    margin-bottom: 0.5em;
+}
+
+/* Estilos para bloques de código */
+.markdown-content pre {
+    background-color: #111827; /* Gris muy oscuro, casi negro */
+    border: 1px solid #374151; /* Borde sutil */
+    padding: 1em;
+    overflow-x: auto;
+    border-radius: 0.375rem; /* rounded-md */
+    margin: 1.5em 0;
+}
+
+.markdown-content code {
+    font-family: monospace;
+    color: #fca5a5; /* Rojo claro para el texto del código */
+    font-size: 0.9em;
+}
+
+.markdown-content pre code {
+    /* Restablece el color para el bloque de código completo si es necesario */
+    color: #fca5a5; 
+    background: none;
+    padding: 0;
+}
+
+/* Estilos para citas (blockquote) */
+.markdown-content blockquote {
+    border-left: 4px solid var(--color-accent);
+    background-color: #1f1f1f;
+    color: #ccc;
+    padding: 0.5em 1em;
+    margin: 1.5em 0;
+    font-style: italic;
+}
+
+/* Estilos para tablas */
+.markdown-content table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5em 0;
+    color: #ccc;
+}
+
+.markdown-content th, 
+.markdown-content td {
+    border: 1px solid #374151;
+    padding: 0.75em;
+    text-align: left;
+}
+
+.markdown-content th {
+    background-color: #1f2937; /* Darker header background */
+    font-weight: 600;
+    color: #E5E5E5;
+}
+
+/* MODIFICACIÓN CLAVE: Asegurarse de que el borde activo de la pestaña sea SOLO rojo */
+.tab-btn.active {
+    border-bottom: 2px solid var(--color-accent) !important; /* Usar directamente el color de acento */
+    color: var(--color-text-primary) !important;
+}
+
+/* Asegurarse de que los colores de los badges de tipo se vean bien */
+.bg-blue-500.text-black, .bg-green-500.text-black, .bg-yellow-400.text-black {
+    color: #000;
+}
