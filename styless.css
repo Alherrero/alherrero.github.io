@@ -32,56 +32,50 @@ body {
 
 .markdown-content h2 {
     font-size: 1.5em; /* 24px */
+    border-bottom: 1px dashed var(--color-border-subtle);
+    padding-bottom: 0.2em;
 }
 
 .markdown-content h3 {
     font-size: 1.25em; /* 20px */
-    color: #ccc;
 }
 
-.markdown-content p {
+.markdown-content p,
+.markdown-content li {
+    font-size: 1.1em; /* 17.6px */
+    line-height: 1.6;
     margin-bottom: 1em;
-    line-height: 1.65;
-    color: #a0a0a0; /* Gris más suave para el texto del cuerpo */
-}
-
-.markdown-content a {
-    color: var(--color-accent); /* Enlaces en rojo */
-    text-decoration: none;
-    transition: color 0.2s;
-}
-
-.markdown-content a:hover {
-    color: #ef4444; /* Rojo más claro al pasar el ratón */
-    text-decoration: underline;
 }
 
 /* Estilos para listas */
 .markdown-content ul,
 .markdown-content ol {
-    margin-bottom: 1em;
-    padding-left: 2em;
-    color: #a0a0a0;
+    margin-left: 2em;
+    margin-bottom: 1.5em;
 }
 
 .markdown-content ul {
     list-style-type: disc;
 }
 
-.markdown-content ol {
-    list-style-type: decimal;
+/* Estilos para enlaces */
+.markdown-content a {
+    color: var(--color-accent);
+    text-decoration: none;
+    transition: color 0.2s ease;
 }
 
-.markdown-content li {
-    margin-bottom: 0.5em;
+.markdown-content a:hover {
+    color: #F87171; /* Rojo más claro al pasar el ratón */
+    text-decoration: underline;
 }
 
-/* Estilos para bloques de código */
+/* Estilos para código en línea */
 .markdown-content pre {
-    background-color: #111827; /* Gris muy oscuro, casi negro */
-    border: 1px solid #374151; /* Borde sutil */
+    background-color: #1a1a1a; /* Fondo muy oscuro para el bloque de código */
     padding: 1em;
     overflow-x: auto;
+    border: 1px solid #2D2D35;
     border-radius: 0.375rem; /* rounded-md */
     margin: 1.5em 0;
 }
@@ -125,18 +119,58 @@ body {
 }
 
 .markdown-content th {
-    background-color: #1f2937; /* Darker header background */
+    background-color: #1f1f24;
     font-weight: 600;
-    color: #E5E5E5;
+    color: var(--color-text-primary);
 }
 
-/* MODIFICACIÓN CLAVE: Asegurarse de que el borde activo de la pestaña sea SOLO rojo */
-.tab-btn.active {
-    border-bottom: 2px solid var(--color-accent) !important; /* Usar directamente el color de acento */
-    color: var(--color-text-primary) !important;
+/* Estilo para los botones de pestañas (tabs) */
+.tab-button {
+    /* Estilos por defecto para todos los botones */
+    background-color: #000000; /* Fondo blanco/gris claro */
+    color: #0A0A0A; /* Texto negro para contraste */
+    border: 1px solid #000000; /* Borde sutil */
+    transition: all 0.2s ease;
+    font-weight: 500;
 }
 
-/* Asegurarse de que los colores de los badges de tipo se vean bien */
-.bg-blue-500.text-black, .bg-green-500.text-black, .bg-yellow-400.text-black {
-    color: #000;
+.tab-button:hover {
+    background-color: #000000; /* Más blanco al pasar el ratón */
+    border-color: #FFFFFF;
+}
+
+/* Estilo para el botón de pestaña activo */
+.tab-button.active {
+    background-color: #000000; /* Fondo blanco para el activo */
+    color: #0A0A0A; /* Texto negro */
+    border: 2px solid #DC2626; /* Borde rojo fuerte para destacarlo */
+    font-weight: 700;
+}
+
+/* Estilo para los botones de filtro dentro de la sección Posts (Todos, Posts, Writeups) */
+/* Estos botones usan `data-category` y están dentro de '#posts-list-wrapper' */
+#posts-list-wrapper button[data-category] {
+    /* Estilos base para todos los botones de filtro */
+    background-color: #121212; /* Fondo blanco/gris claro */
+    color: #ffffff; /* Texto negro para contraste */
+    border: 1px solid #000000; /* Borde sutil */
+    transition: all 0.2s ease;
+    font-weight: 500;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+#posts-list-wrapper button[data-category]:hover {
+    background-color: #000000;
+    border-color: #FFFFFF;
+}
+
+/* Estilo para el botón de filtro activo */
+#posts-list-wrapper button[data-category].active {
+    background-color: #000000; /* Fondo blanco para el activo */
+    color: #ffffff; /* Texto negro */
+    border: 1px solid #DC2626; /* Borde rojo fuerte para destacarlo */
+    font-weight: 700;
+    padding-left: 13px;
+    padding-right: 13px;
 }

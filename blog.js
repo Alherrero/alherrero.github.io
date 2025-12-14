@@ -87,7 +87,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 
                 <!-- Footer de la tarjeta: Lectura y Botón -->
                 <div class="flex items-center justify-between pt-4 border-t border-neutral-800">
-                    <span class="text-xs text-gray-500">${post.hora_lectura} de lectura</span>
+                    
                     
                     <button 
                         data-post-id="${post.id}"
@@ -135,7 +135,6 @@ document.addEventListener("DOMContentLoaded", () => {
                     <div class="flex items-center space-x-4 mb-6 text-sm text-gray-500">
                         <span class="inline-block px-2 py-0.5 text-xs font-semibold ${post.tipo === 'writeup' ? 'bg-green-500 text-black' : 'bg-blue-500 text-black'}">${post.tipo === 'writeup' ? 'Writeup' : 'Post'}</span>
                         <span>Publicado: ${post.fecha}</span>
-                        <span>${post.hora_lectura} de lectura</span>
                     </div>
 
                     <div class="markdown-content text-left text-gray-300 space-y-4"> 
