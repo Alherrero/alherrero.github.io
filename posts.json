@@ -1,7 +1,14 @@
 [
   {
+    "nombre": "Máquina Return ⬅️",
+    "descripcion": "Writeup de la máquina Return, de dificultad fácil, de la plataforma HackTheBox.",
+    "ruta": "posts/writeup_return.md",
+    "tipo": "writeup",
+    "fecha": "15/12/2025"
+  },
+  {
     "nombre": "Máquina Validation 🪪",
-    "descripcion": "Writeup de la máquina Validation, de dificultad facil, de la plataforma HackTheBox.",
+    "descripcion": "Writeup de la máquina Validation, de dificultad fácil, de la plataforma HackTheBox.",
     "ruta": "posts/writeup_validation.md",
     "tipo": "writeup",
     "fecha": "14/12/2025"
