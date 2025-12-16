@@ -1,5 +1,12 @@
 [
   {
+    "nombre": "Máquina Horizontall 📏",
+    "descripcion": "Writeup de la máquina Horizontall, de dificultad fácil, de la plataforma HackTheBox.",
+    "ruta": "posts/writeup_horizontall.md",
+    "tipo": "writeup",
+    "fecha": "16/12/2025"
+  },
+  {
     "nombre": "Máquina Return ⬅️",
     "descripcion": "Writeup de la máquina Return, de dificultad fácil, de la plataforma HackTheBox.",
     "ruta": "posts/writeup_return.md",
