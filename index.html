@@ -1,166 +1,322 @@
 <!DOCTYPE html>
-<html lang="es" class="scroll-smooth">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alejandro Herrero Raboso | AH-SEC</title>
+    <title>Alejandro Herrero Raboso | Professional Pentester Portfolio</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;700&family=Inter:wght@300;400;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" href="/logoweb.png" type="image/x-icon">
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;700&family=Inter:wght@400;700;900&display=swap');
+
         :root {
-            --bg-dark: #050505;
-            --accent-red: #ff3e3e;
-            --card-bg: #0f0f12;
+            --neon-green: #00ff41;
+            --dark-bg: #050505;
+            --card-bg: transparent;
+            /* Cambiado a transparente para ver el fondo */
         }
 
         body {
-            background-color: var(--bg-dark);
-            color: white;
             font-family: 'Inter', sans-serif;
+            background-color: var(--dark-bg);
+            color: #e2e8f0;
+            scroll-behavior: smooth;
+            margin: 0;
+            min-height: 100vh;
         }
 
-        .mono { font-family: 'Fira Code', monospace; }
+        .mono {
+            font-family: 'Fira Code', monospace;
+        }
 
+        /* Solución definitiva para el fondo: Cuadrícula SVG nítida */
         .bg-grid {
-            background-size: 40px 40px;
-            background-image: linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+            background-color: var(--dark-bg);
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'%3E%3Cpath d='M40 40H0V0h40v40zM1 39h38V1H1v38z' fill='none' stroke='%23ffffff' stroke-opacity='0.03'/%3E%3C/svg%3E");
         }
 
-        .hero-gradient {
-            background: radial-gradient(circle at 50% 50%, rgba(255, 62, 62, 0.1) 0%, transparent 70%);
+        .neon-text {
+            color: var(--neon-green);
+            text-shadow: 0 0 10px rgba(0, 255, 65, 0.3);
         }
 
-        .countdown-box {
-            background: rgba(15, 15, 18, 0.6);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 62, 62, 0.1);
+        /* Ajuste de legibilidad en el hover */
+        .gradient-border {
+            position: relative;
+            background: var(--card-bg);
+            border-radius: 12px;
+            z-index: 1;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            /* Un poco más de borde para separar del fondo */
+            transition: transform 0.3s ease, background 0.3s ease;
         }
 
-        .typing::after {
-            content: "_";
-            animation: blink 1s infinite;
+        .gradient-border::before {
+            content: "";
+            position: absolute;
+            top: -1px;
+            left: -1px;
+            right: -1px;
+            bottom: -1px;
+            background: linear-gradient(45deg, var(--neon-green), #004d13, transparent);
+            border-radius: 13px;
+            z-index: -1;
+            transition: opacity 0.3s ease;
+            opacity: 0;
+        }
+       
+        .vulnerability-card:hover {
+            transform: translateY(-5px);
         }
 
-        @keyframes blink { 50% { opacity: 0; } }
-
-        .tech-badge {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            transition: all 0.3s ease;
+        .roadmap-step {
+            position: relative;
+            padding-left: 2rem;
+            border-left: 2px solid #1a1a1a;
         }
 
-        .tech-badge:hover {
-            border-color: var(--accent-red);
-            background: rgba(255, 62, 62, 0.05);
+        .roadmap-step::before {
+            content: "";
+            position: absolute;
+            left: -7px;
+            top: 0;
+            width: 12px;
+            height: 12px;
+            background: var(--neon-green);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--neon-green);
         }
     </style>
 </head>
 
-<body class="antialiased bg-grid min-h-screen">
-    <div class="fixed inset-0 hero-gradient pointer-events-none"></div>
+<body class="bg-grid">
 
-    <nav class="relative z-50 max-w-6xl mx-auto px-6 py-8 flex justify-between items-center">
-        <div class="mono font-bold text-xl flex items-center gap-2">
-            <span class="text-[var(--accent-red)]">[</span> AH-SEC <span class="text-[var(--accent-red)]">]</span>
-        </div>
-        <div class="text-[10px] mono uppercase tracking-widest text-red-500/60 animate-pulse">
-            En Construcción
+    <!-- Navbar -->
+    <nav class="fixed w-full z-50 bg-black/90 backdrop-blur-xl border-b border-white/5">
+        <div class="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
+            <div class="flex items-center gap-2">
+                <i class="fa-solid fa-shield-halved text-green-500 text-xl"></i>
+                <span class="mono text-green-500 font-bold text-xl tracking-tighter uppercase"></span>
+            </div>
+            <div class="hidden md:flex space-x-10 text-xs uppercase tracking-[0.2em] font-bold">
+                <a href="#inicio" class="hover:text-green-500 transition">Whoami</a>
+                <a href="#hallazgos" class="hover:text-green-500 transition">vulnerabilidades</a>
+                <a href="#roadmap" class="hover:text-green-500 transition">Objetivos 2026</a>
+                <a href="#contacto" class="hover:text-green-500 transition">Contacto</a>
+            </div>
         </div>
     </nav>
 
-    <main class="relative z-10 max-w-4xl mx-auto px-6 pt-12 pb-32">
-        <!-- Sección de Perfil -->
-        <header class="text-center mb-20">
-            <div class="inline-flex items-center gap-2 px-3 py-1 mb-6 border border-red-500/30 bg-red-500/5 text-[var(--accent-red)] text-[10px] mono uppercase tracking-widest rounded-full">
-                Investigador de Seguridad | Red Team
-            </div>
-            
-            <h1 class="text-5xl md:text-7xl font-black mb-8 tracking-tighter leading-tight">
-                Alejandro <span class="text-transparent bg-clip-text bg-gradient-to-b from-red-500 to-red-900">Herrero Raboso</span>
+    <!-- Hero -->
+    <section id="inicio" class="min-h-screen flex items-center justify-center px-6 relative overflow-hidden">
+        <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-green-500/5 rounded-full blur-[120px]"></div>
+        <div class="max-w-5xl w-full z-10 text-center md:text-left">
+            <h1 class="text-6xl md:text-8xl font-black text-white mb-6 leading-none tracking-tight">
+                Alejandro <br><span
+                    class="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-green-900">Herrero
+                    Raboso</span>
             </h1>
+            <div class="text-lg md:text-xl text-gray-400 max-w-4xl leading-relaxed mb-6 font-light">
+                <p class="mb-4">
+                    Soy Alejandro, un entusiasta de la ciberseguridad al que le gusta aprender algo nuevo cada día. Me
+                    centro principalmente en el <span class="text-white font-medium">pentesting web</span>, teniendo
+                    experiencia reportando varias vulnerabilidades a empresas.
+                </p>
+                <p>
+                    Trabajo con Windows y Linux, configuro máquinas virtuales y desarrollo scripts en Python. Uso
+                    tecnologías web como HTML, CSS y JavaScript para reforzar mis habilidades y proyectos personales.
+                    Aprendo rápido, me adapto con facilidad a nuevos desafíos y siempre busco maneras de mejorar y
+                    crecer en el campo del hacking ético.
+                </p>
+            </div>
 
-            <p class="text-lg text-slate-400 max-w-2xl mx-auto mb-10 leading-relaxed">
-                Entusiasta de la ciberseguridad enfocado en <span class="text-white">pentesting web</span> y automatización. 
-                Especializado en la identificación de vectores de ataque y securización de entornos.
+            <!-- Tech Badges -->
+            <div class="flex flex-wrap justify-center md:justify-start gap-4 mb-10 opacity-80">
+                <img src="https://img.shields.io/badge/Linux-000?style=for-the-badge&logo=linux&logoColor=white"
+                    alt="Linux">
+                <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white"
+                    alt="Python">
+                <img src="https://img.shields.io/badge/Burp_Suite-FF6633?style=for-the-badge&logo=burp-suite&logoColor=white"
+                    alt="Burp Suite">
+                <img src="https://img.shields.io/badge/Bash-4EAA25?style=for-the-badge&logo=gnu-bash&logoColor=white"
+                    alt="Bash">
+            </div>
+
+            <div class="flex flex-wrap justify-center md:justify-start gap-6">
+                <a href="#hallazgos"
+                    class="bg-white text-black px-10 py-4 font-black rounded-sm hover:bg-green-500 transition-all duration-300">
+                    EXPLORAR HALLAZGOS
+                </a>
+                <div class="flex items-center gap-4 text-2xl text-gray-500">
+                    <a href="https://github.com/alherrero" class="hover:text-white transition"><i class="fa-brands fa-github"></i></a>
+                    <!--
+                    <a href="#" class="hover:text-white transition"><i class="fa-brands fa-linkedin"></i></a>
+                    -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Detailed Findings Section -->
+    <section id="hallazgos" class="py-32 px-6">
+        <div class="max-w-6xl mx-auto">
+            <h3 class="text-4xl font-black mb-6 flex items-center gap-6 text-white">
+                <i class="fa-solid fa-terminal text-green-500"></i>
+                VULNERABILIDADES REPORTADAS
+            </h3>
+            <p class="text-gray-400 mb-12 max-w-3xl leading-relaxed">
+                A continuación se presentan vulnerabilidades reales que he reportado en infraestructuras corporativas y
+                reportadas mediante programas de <span class="text-white font-bold">Divulgación Responsable</span>.
+                <span class="text-green-500/80 italic font-medium">Por motivos de seguridad, los nombres de las empresas
+                    han sido omitidos.</span>
             </p>
 
-            <!-- Tecnologías -->
-            <div class="flex flex-wrap justify-center gap-3 mb-12">
-                <span class="tech-badge px-4 py-2 rounded-lg mono text-xs flex items-center gap-2">
-                    <img src="https://img.shields.io/badge/-Python-3776AB?logo=python&logoColor=white" class="h-4" alt="Python">
-                </span>
-                <span class="tech-badge px-4 py-2 rounded-lg mono text-xs flex items-center gap-2">
-                    <img src="https://img.shields.io/badge/-Linux-FCC624?logo=linux&logoColor=black" class="h-4" alt="Linux">
-                </span>
-                <span class="tech-badge px-4 py-2 rounded-lg mono text-xs flex items-center gap-2">
-                    <img src="https://img.shields.io/badge/-Burp_Suite-FF6633?logo=burpsuite&logoColor=white" class="h-4" alt="Burp Suite">
-                </span>
-                <span class="tech-badge px-4 py-2 rounded-lg mono text-xs flex items-center gap-2">
-                    <img src="https://img.shields.io/badge/-Bash-4EAA25?logo=gnubash&logoColor=white" class="h-4" alt="Bash">
-                </span>
+            <div class="grid grid-cols-1 gap-10">
+
+                
+                <!-- IDOR ANUNCIOS -->
+                <div class="gradient-border p-8 vulnerability-card">
+                    <div class="flex flex-wrap justify-between items-start mb-6 gap-4">
+                        <div>
+                            <span class="text-xs font-bold text-green-500 mono bg-green-500/10 px-3 py-1 rounded">30
+                                MAYO 2025</span>
+                            <h4 class="text-2xl font-bold text-white mt-3">IDOR Anuncios</h4>
+                        </div>
+                        <span class="px-4 py-1 bg-green-500/20 text-green-400 text-xs font-bold rounded-full">
+                            BAJA</span>
+                    </div>
+
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div>
+                            <h5 class="text-green-500 text-xs font-bold uppercase mb-2">Descripción</h5>
+                            <p class="text-gray-400 text-sm leading-relaxed">
+                                Esta vulnerabilidad la encontré en un centro educativo. En una sección de anuncios para
+                                profesores, no se validaba el ID de la persona que accedía al contenido.
+                            </p>
+                        </div>
+                        <div>
+                            <h5 class="text-green-500 text-xs font-bold uppercase mb-2">Impacto</h5>
+                            <p class="text-gray-400 text-sm leading-relaxed">
+                                Esta vulnerabilidad me permitió listar anuncios de profesores sin disponer de dicho rol.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- SQLI Amonestaciones -->
+                <div class="gradient-border p-8 vulnerability-card">
+                    <div class="flex flex-wrap justify-between items-start mb-6 gap-4">
+                        <div>
+                            <span class="text-xs font-bold text-green-500 mono bg-green-500/10 px-3 py-1 rounded">12
+                                ABRIL 2025</span>
+                            <h4 class="text-2xl font-bold text-white mt-3">SQLi Amonestaciones</h4>
+                        </div>
+                        <span class="px-4 py-1 bg-red-500/20 text-red-400 text-xs font-bold rounded-full">
+                            ALTA</span>
+                    </div>
+
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div>
+                            <h5 class="text-green-500 text-xs font-bold uppercase mb-2">Descripción</h5>
+                            <p class="text-gray-400 text-sm leading-relaxed">
+                                Esta vulnerabilidad la encontré en un panel de administración de amonestaciones a los
+                                trabajadores de la empresa. Mediante fuzzing, encontré un endpoint que pude explotar
+                                realizando una inyección SQL de tipo error-based.
+                            </p>
+                        </div>
+                        <div>
+                            <h5 class="text-green-500 text-xs font-bold uppercase mb-2">Impacto</h5>
+                            <p class="text-gray-400 text-sm leading-relaxed">
+                                Esta inyección me permitió obtener toda la base de datos y acceder como administrador a
+                                la plataforma. Además, pude reutilizar la contraseña de un usuario administrador para
+                                acceder a un WordPress.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+
             </div>
-        </header>
+        </div>
+    </section>
 
-        <div class="h-px w-full bg-gradient-to-r from-transparent via-white/10 to-transparent mb-20"></div>
-
-        <!-- Sección de Construcción -->
-        <section class="text-center">
-            <h2 class="mono text-sm font-bold mb-4 text-[var(--accent-red)] tracking-[0.3em] uppercase">Estado: En Desarrollo</h2>
-            <p class="mono text-gray-500 mb-12 text-xs typing">> Lanzamiento previsto para el 1 de enero de 2026...</p>
-
-            <!-- Contador de Tiempo -->
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-16 max-w-2xl mx-auto">
-                <div class="countdown-box p-4 rounded-xl">
-                    <div id="days" class="text-3xl font-bold text-white mb-1">00</div>
-                    <div class="text-[9px] mono uppercase tracking-widest text-red-500/60">Días</div>
+    <!-- Roadmap 2026 -->
+    <section id="roadmap" class="py-32 px-6 max-w-6xl mx-auto border-t border-white/5">
+        <div class="max-w-4xl mx-auto">
+            <h3 class="text-4xl font-black mb-8 italic uppercase tracking-tighter text-white">Objetivos <span
+                    class="text-green-500 underline"> 2026</span></h3>
+            <p class="text-gray-400 mb-12 leading-relaxed">
+                Para el año 2026, mi enfoque está centrado en la obtención de certificaciones para validar mis
+                habilidades en pentesting.
+            </p>
+            <div class="grid md:grid-cols-2 gap-12">
+                <div class="roadmap-step">
+                    <h4 class="text-xl font-bold text-white uppercase tracking-wider">eJPTv2 Certification</h4>
+                    <p class="text-sm text-gray-500 mt-2 mb-4">Junior Penetration Tester.</p>
+                    <img src="https://assets.ine.com/certifications/badges/eJPT.png" alt="eJPTv2"
+                        class="w-24 opacity-50 group-hover:opacity-100 group-hover:grayscale-0 transition-all duration-500 transform group-hover:scale-110">
                 </div>
-                <div class="countdown-box p-4 rounded-xl">
-                    <div id="hours" class="text-3xl font-bold text-white mb-1">00</div>
-                    <div class="text-[9px] mono uppercase tracking-widest text-red-500/60">Horas</div>
-                </div>
-                <div class="countdown-box p-4 rounded-xl">
-                    <div id="minutes" class="text-3xl font-bold text-white mb-1">00</div>
-                    <div class="text-[9px] mono uppercase tracking-widest text-red-500/60">Minutos</div>
-                </div>
-                <div class="countdown-box p-4 rounded-xl">
-                    <div id="seconds" class="text-3xl font-bold text-white mb-1">00</div>
-                    <div class="text-[9px] mono uppercase tracking-widest text-red-500/60">Segundos</div>
+                <div class="roadmap-step">
+                    <h4 class="text-xl font-bold text-white uppercase tracking-wider">eWPT Certification</h4>
+                    <p class="text-sm text-gray-500 mt-2 mb-4">Web Application Penetration Tester.</p>
+                    <img src="https://assets.ine.com/certifications/badges/eWPT.png" alt="eWPT"
+                        class="w-24 opacity-50 group-hover:opacity-100 group-hover:grayscale-0 transition-all duration-500 transform group-hover:scale-110">
                 </div>
             </div>
-        </section>
-    </main>
+        </div>
+    </section>
 
-    <footer class="py-12 text-center text-slate-600 text-[9px] mono uppercase tracking-[0.4em]">
-        &copy; 2026 Alejandro Herrero | AH-SEC
+    <!-- Contact -->
+    <section id="contacto" class="py-32 px-6">
+        <div class="max-w-4xl mx-auto text-center">
+            <h3 class="text-5xl font-black text-white mb-8">Contacto</h3>
+            <a href="mailto:alejandroherrero95h@gmail.com"
+                class="text-2xl md:text-4xl font-bold text-green-500 hover:text-white transition-all underline decoration-green-500/30 font-mono">
+                alejandroherrero95h@gmail.com
+            </a>
+        </div>
+    </section>
+
+    <footer
+        class="py-12 border-t border-white/5 text-center text-gray-600 font-bold uppercase tracking-widest text-[10px]">
+        &copy; 2026 Alejandro Herrero Raboso
     </footer>
 
     <script>
-        const targetDate = new Date("Jan 1, 2026 00:00:00").getTime();
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
 
-        const updateCountdown = () => {
-            const now = new Date().getTime();
-            const difference = targetDate - now;
+        // Scroll reveal animation
+        const observerOptions = { threshold: 0.1 };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = "1";
+                    entry.target.style.transform = "translateY(0)";
+                }
+            });
+        }, observerOptions);
 
-            if (difference < 0) {
-                document.getElementById('days').innerText = "00";
-                return;
-            }
-
-            const d = Math.floor(difference / (1000 * 60 * 60 * 24));
-            const h = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const m = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
-            const s = Math.floor((difference % (1000 * 60)) / 1000);
-
-            document.getElementById('days').innerText = d.toString().padStart(2, '0');
-            document.getElementById('hours').innerText = h.toString().padStart(2, '0');
-            document.getElementById('minutes').innerText = m.toString().padStart(2, '0');
-            document.getElementById('seconds').innerText = s.toString().padStart(2, '0');
-        };
-
-        setInterval(updateCountdown, 1000);
-        updateCountdown();
+        document.querySelectorAll('section').forEach(section => {
+            section.style.opacity = "0";
+            section.style.transform = "translateY(-100px)";
+            section.style.transition = "all 0.6s ease-out";
+            observer.observe(section);
+        });
     </script>
 </body>
 
