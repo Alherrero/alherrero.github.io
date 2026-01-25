@@ -1,0 +1,10 @@
+[
+  {
+    "id": 1,
+    "nombre": "Entorno BSPWM 2026",
+    "descripcion": "Entorno de escritorio minimalista basado en BSPWM optimizado para flujo de trabajo de pentesting profesional.",
+    "tecnologias": ["Linux", "BSPWM"],
+    "imagen": "img/entorno.png",
+    "github": "https://github.com/Alherrero/EntornoBSPWM-2026"
+  }
+]
