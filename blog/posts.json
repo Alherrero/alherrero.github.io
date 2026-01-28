@@ -1,0 +1,18 @@
+[
+    {
+        "id": "4",
+        "titulo": "Care - VulNyx Writeup",
+        "descripcion": "Writeup del laboratorio Care de dificultad fácil de la plataforma VulNyx.",
+        "imagen": "imgArticulos/care.png",
+        "categoria": "VulNyx",
+        "url": "posts/care.html"
+    },
+    {
+        "id": "1",
+        "titulo": "MailForge - VulNyx Writeup",
+        "descripcion": "Writeup de la maquina MailForge de dificultad fácil de la plataforma VulNyx.",
+        "imagen": "imgArticulos/mailforge.png",
+        "categoria": "VulNyx",
+        "url": "posts/mailforge.html"
+    }
+]
