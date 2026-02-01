@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Redireccionando...</title>
+    <script>
+        window.onload = function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const id = urlParams.get('id');
+            
+            // Base de la nueva URL
+            let nuevaUrl = "https://alherrero.github.io/blog/posts/mailforge.html";
+
+            window.location.href = nuevaUrl;
+        };
+    </script>
+</head>
+<body>
+    <p>Si no eres redirigido automáticamente, <a href="https://alherrero.github.io/blog/posts/mailforge.html">haz clic aquí</a>.</p>
+</body>
+</html>
