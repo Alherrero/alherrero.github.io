@@ -1,7 +1,15 @@
 [
     {
+        "id": "7",
+        "titulo": "Horizontall",
+        "descripcion": "Writeup de la máquina Horizontall de dificultad fácil de la plataforma HackTheBox.",
+        "imagen": "imgArticulos/horizontall.jpg",
+        "categoria": "HackTheBox",
+        "url": "posts/horizontall.html"
+    },
+    {
         "id": "6",
-        "titulo": "Return - HackTheBox Writeup",
+        "titulo": "Return",
         "descripcion": "Writeup de la máquina Return de dificultad fácil de la plataforma HackTheBox.",
         "imagen": "imgArticulos/return.jpg",
         "categoria": "HackTheBox",
@@ -9,7 +17,7 @@
     },
     {
         "id": "4",
-        "titulo": "Care - VulNyx Writeup",
+        "titulo": "Care",
         "descripcion": "Writeup del laboratorio Care de dificultad fácil de la plataforma VulNyx.",
         "imagen": "imgArticulos/care.png",
         "categoria": "VulNyx",
@@ -17,7 +25,7 @@
     },
     {
         "id": "1",
-        "titulo": "MailForge - VulNyx Writeup",
+        "titulo": "MailForge",
         "descripcion": "Writeup de la maquina MailForge de dificultad fácil de la plataforma VulNyx.",
         "imagen": "imgArticulos/mailforge.png",
         "categoria": "VulNyx",
