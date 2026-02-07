@@ -4,138 +4,128 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alherrero Proyectos</title>
+    <title>Proyectos PROJECTS</title>
     <link rel="icon" href="../logo.png" type="image/png">
+    <link rel="stylesheet" href="../navbar.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Orbitron:wght@700;800;900&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#0a0612',
+                        secondary: '#0a1520',
+                        card: '#12202e',
+                        accent: '#3b82f6',
+                        accentLight: '#60a5fa',
+                        circuit: '#1d4ed8',
+                    },
+                    fontFamily: {
+                        sans: ['JetBrains Mono', 'monospace'],
+                        display: ['Orbitron', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
-
-        body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: #050505;
-            color: #fafafa;
-            margin: 0;
-            overflow-x: hidden;
+        .circuit-pattern {
+            background-image: linear-gradient(90deg, rgba(59, 130, 246, 0.05) 1px, transparent 1px),
+                              linear-gradient(rgba(59, 130, 246, 0.05) 1px, transparent 1px);
+            background-size: 50px 50px;
         }
-
-        .code-font { font-family: 'JetBrains Mono', monospace; }
-
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #050505; }
-        ::-webkit-scrollbar-thumb { background: rgba(129, 140, 248, 0.2); border-radius: 10px; }
-        ::-webkit-scrollbar-thumb:hover { background: rgba(129, 140, 248, 0.4); }
-
-        .glass {
-            background: rgba(255, 255, 255, 0.02);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .project-card {
-            background: rgba(255, 255, 255, 0.01);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
-        }
-
-        .project-card:hover {
-            transform: translateY(-5px);
-            border-color: rgba(129, 140, 248, 0.4);
-            background: rgba(129, 140, 248, 0.02);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-        }
-
         .gradient-text {
-            background: linear-gradient(90deg, #818cf8, #c084fc);
+            background: linear-gradient(135deg, #3b82f6, #06b6d4, #60a5fa);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
-
-        .search-focus:focus {
-            border-color: rgba(129, 140, 248, 0.5);
-            background: rgba(255, 255, 255, 0.05);
-            box-shadow: 0 0 20px rgba(129, 140, 248, 0.1);
+        .cyber-card {
+            background: rgba(18, 32, 46, 0.6);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
         }
-
-        .tech-pill {
-            font-size: 0.65rem;
-            background: rgba(129, 140, 248, 0.1);
-            color: #a5b4fc;
-            border: 1px solid rgba(129, 140, 248, 0.2);
+        .cyber-card:hover {
+            border-color: #3b82f6;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 40px rgba(59, 130, 246, 0.15);
         }
-
         .sort-dropdown {
             max-height: 0;
             overflow: hidden;
             transition: max-height 0.3s ease;
             z-index: 50;
+            background: rgba(10, 21, 32, 0.95);
+            border: 1px solid rgba(59, 130, 246, 0.1);
         }
-
-        .sort-dropdown.active { max-height: 200px; border: 1px solid rgba(255,255,255,0.08); }
-
+        .sort-dropdown.active { max-height: 200px; border-color: rgba(59, 130, 246, 0.4); }
+        
         .skeleton {
-            background: linear-gradient(90deg, rgba(255,255,255,0.02) 25%, rgba(255,255,255,0.05) 50%, rgba(255,255,255,0.02) 75%);
+            background: linear-gradient(90deg, rgba(59, 130, 246, 0.05) 25%, rgba(59, 130, 246, 0.1) 50%, rgba(59, 130, 246, 0.05) 75%);
             background-size: 200% 100%;
             animation: skeleton-loading 1.5s infinite;
         }
-
         @keyframes skeleton-loading {
             0% { background-position: 200% 0; }
             100% { background-position: -200% 0; }
         }
-
-        .fade-in { animation: fadeIn 0.5s ease forwards; }
+        .fade-in { animation: fadeIn 0.6s ease forwards; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 
-<body class="selection:bg-indigo-500/30">
+<body class="bg-primary text-gray-100 selection:bg-accent/30 font-sans">
+    <div class="fixed inset-0 circuit-pattern -z-10 opacity-40"></div>
 
-    <nav class="fixed w-full z-50 top-0 border-b border-white/5 bg-black/60 backdrop-blur-md">
+    <nav class="fixed w-full z-50 top-0 border-b border-accent/10 bg-primary/80 backdrop-blur-lg">
         <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-            <a href="../index.html" class="code-font text-gray-400 hover:text-white transition-colors text-sm flex items-center gap-2">
-                <i class="fas fa-chevron-left text-xs"></i> Volver
+            <a href="../index.html" class="text-gray-400 hover:text-accent transition-colors text-xs flex items-center gap-2 font-bold uppercase tracking-widest">
+                <i class="fas fa-chevron-left text-[10px]"></i> Volver
             </a>
-            <div id="totalProjects" class="code-font text-[10px] uppercase tracking-widest text-indigo-400/60 font-bold">
-                0 PROYECTOS
+            <div id="totalProjects" class="text-[10px] uppercase tracking-widest text-accent font-bold">
+                Cargando...
             </div>
         </div>
     </nav>
 
     <header class="max-w-7xl mx-auto px-6 pt-32 pb-12">
-        <div class="max-w-4xl">
-            <h1 class="text-5xl md:text-7xl font-extrabold tracking-tighter mb-4">
-                Alherrero <span class="gradient-text">Projects</span>
+        <div class="max-w-5xl">
+            <h1 class="font-display text-4xl md:text-6xl font-black tracking-tighter mb-4">
+                ALHERRERO <span class="gradient-text">PROJECTS</span>
             </h1>
             <p class="text-gray-400 text-lg leading-relaxed mb-10 max-w-2xl">
-               Bienvenido a mis proyectos. Aquí encontrarás todos en los que he trabajado.
+               Este es un espacio donde comparto mis proyectos de pentesting.
             </p>
             
             <div class="space-y-6">
                 <div class="grid grid-cols-1 md:grid-cols-12 gap-4">
                     <div class="relative group md:col-span-9">
-                        <i class="fas fa-search absolute left-4 top-1/2 -translate-y-1/2 text-gray-600 group-focus-within:text-indigo-400 transition-colors"></i>
+                        <i class="fas fa-search absolute left-5 top-1/2 -translate-y-1/2 text-gray-600 group-focus-within:text-accent transition-colors"></i>
                         <input type="text" id="searchInput" placeholder="Buscar herramienta o lab..." 
-                            class="w-full bg-white/5 border border-white/10 rounded-2xl py-4 pl-12 pr-12 text-white focus:outline-none search-focus transition-all text-sm">
-                        <button id="clearSearch" class="absolute right-4 top-1/2 -translate-y-1/2 text-gray-600 hover:text-white hidden">
+                            class="w-full bg-secondary border border-accent/20 rounded-xl py-4 pl-14 pr-12 text-white focus:outline-none focus:border-accent transition-all text-sm">
+                        <button id="clearSearch" class="absolute right-5 top-1/2 -translate-y-1/2 text-gray-600 hover:text-white hidden">
                             <i class="fas fa-times"></i>
                         </button>
                     </div>
 
                     <div class="md:col-span-3 relative">
-                        <button id="sortButton" class="w-full h-full glass rounded-2xl px-6 py-4 text-xs font-bold uppercase tracking-widest flex items-center justify-between hover:border-indigo-500/30 transition-all">
-                            <span><i class="fas fa-sort-amount-down mr-2 text-indigo-400"></i> Ordenar</span>
+                        <button id="sortButton" class="w-full h-full bg-secondary border border-accent/20 rounded-xl px-6 py-4 text-[10px] font-bold uppercase tracking-widest flex items-center justify-between hover:border-accent transition-all">
+                            <span><i class="fas fa-sort-amount-down mr-2 text-accent"></i> Ordenar</span>
                             <i class="fas fa-chevron-down text-[10px]"></i>
                         </button>
-                        <div id="sortDropdown" class="sort-dropdown absolute top-full left-0 w-full mt-2 glass rounded-xl overflow-hidden shadow-2xl">
-                            <button class="sort-option w-full px-5 py-3 text-left hover:bg-white/5 text-[10px] font-bold uppercase tracking-widest text-gray-400 hover:text-white transition-all" data-sort="recent">Más recientes</button>
-                            <button class="sort-option w-full px-5 py-3 text-left hover:bg-white/5 text-[10px] font-bold uppercase tracking-widest text-gray-400 hover:text-white transition-all" data-sort="name">Nombre A-Z</button>
+                        <div id="sortDropdown" class="sort-dropdown absolute top-full left-0 w-full mt-2 rounded-xl shadow-2xl">
+                            <button class="sort-option w-full px-5 py-3 text-left hover:bg-accent/10 text-[10px] font-bold uppercase tracking-widest text-gray-400 hover:text-white transition-all" data-sort="recent">Más recientes</button>
+                            <button class="sort-option w-full px-5 py-3 text-left hover:bg-accent/10 text-[10px] font-bold uppercase tracking-widest text-gray-400 hover:text-white transition-all" data-sort="name">Nombre A-Z</button>
                         </div>
                     </div>
                 </div>
 
                 <div class="flex flex-wrap items-center gap-3">
-                    <span class="text-[10px] font-bold text-gray-600 uppercase tracking-widest">Stack:</span>
+                    <span class="text-[10px] font-bold text-gray-500 uppercase tracking-widest">Stack:</span>
                     <div id="techFilters" class="flex flex-wrap gap-2"></div>
                 </div>
             </div>
@@ -144,23 +134,25 @@
 
     <main class="max-w-7xl mx-auto px-6 pb-24">
         <div id="resultsInfo" class="mb-8 text-[10px] font-bold uppercase tracking-[0.2em] text-gray-500 hidden">
-            Filtrados: <span id="resultsCount" class="text-indigo-400">0</span> proyectos
+            Filtrados: <span id="resultsCount" class="text-accent">0</span> proyectos
         </div>
 
-        <div id="projectsGrid" class="grid md:grid-cols-2 gap-6">
-            <div class="glass h-[400px] rounded-3xl skeleton"></div>
-            <div class="glass h-[400px] rounded-3xl skeleton"></div>
+        <div id="projectsGrid" class="grid md:grid-cols-2 lg:grid-cols-2 gap-8">
+            <div class="cyber-card h-[400px] rounded-2xl skeleton"></div>
+            <div class="cyber-card h-[400px] rounded-2xl skeleton"></div>
         </div>
         
-        <div id="noResults" class="hidden py-24 text-center glass rounded-3xl">
+        <div id="noResults" class="hidden py-24 text-center cyber-card rounded-2xl">
             <i class="fas fa-search text-3xl text-gray-700 mb-4"></i>
-            <p class="text-gray-500 font-medium">No hay coincidencias en el repositorio</p>
-            <button id="resetFilters" class="mt-4 text-[10px] font-bold text-indigo-400 uppercase tracking-widest">Ver todo</button>
+            <p class="text-gray-500 font-medium font-sans">No hay coincidencias en el repositorio</p>
+            <button id="resetFilters" class="mt-4 text-[10px] font-bold text-accent uppercase tracking-widest hover:text-accentLight transition-colors">Ver todo</button>
         </div>
     </main>
 
-    <footer class="py-12 border-t border-white/5 text-center text-[10px] font-bold text-gray-600 uppercase tracking-widest">
-        &copy; 2026 Alherrero • Security Research Repository
+    <footer class="py-12 border-t border-accent/10 text-center">
+        <p class="text-[10px] tracking-[0.3em] uppercase text-gray-600">
+            © 2026 Alejandro Herrero Raboso
+        </p>
     </footer>
 
     <script>
@@ -179,7 +171,7 @@
                 updateView();
             } catch (error) {
                 console.error("Error cargando proyectos:", error);
-                document.getElementById('projectsGrid').innerHTML = `<div class="col-span-full glass p-12 text-center text-red-400 uppercase text-xs font-bold tracking-widest">Error 500: Fallo en la base de datos de proyectos</div>`;
+                document.getElementById('projectsGrid').innerHTML = `<div class="col-span-full cyber-card p-12 rounded-2xl text-center text-accent uppercase text-[10px] font-bold tracking-widest">Error: Fallo en la conexión con el repositorio</div>`;
             }
         }
 
@@ -192,7 +184,7 @@
             const techs = [...new Set(allProjects.flatMap(p => p.tecnologias))];
             const techContainer = document.getElementById('techFilters');
             techContainer.innerHTML = techs.map(tech => `
-                <button class="tech-filter px-3 py-1.5 glass rounded-lg text-[10px] font-bold uppercase tracking-tighter transition-all hover:border-indigo-500/30" data-tech="${tech}">
+                <button class="tech-filter px-3 py-1.5 bg-accent/5 border border-accent/20 rounded-lg text-[10px] font-bold uppercase tracking-tighter transition-all hover:border-accent" data-tech="${tech}">
                     ${tech}
                 </button>
             `).join('');
@@ -202,11 +194,11 @@
                     const tech = e.currentTarget.dataset.tech;
                     if (activeTech === tech) {
                         activeTech = null;
-                        e.currentTarget.classList.remove('bg-indigo-500/20', 'text-indigo-300', 'border-indigo-500/50');
+                        e.currentTarget.classList.remove('bg-accent/20', 'text-accent', 'border-accent');
                     } else {
-                        document.querySelectorAll('.tech-filter').forEach(b => b.classList.remove('bg-indigo-500/20', 'text-indigo-300', 'border-indigo-500/50'));
+                        document.querySelectorAll('.tech-filter').forEach(b => b.classList.remove('bg-accent/20', 'text-accent', 'border-accent'));
                         activeTech = tech;
-                        e.currentTarget.classList.add('bg-indigo-500/20', 'text-indigo-300', 'border-indigo-500/50');
+                        e.currentTarget.classList.add('bg-accent/20', 'text-accent', 'border-accent');
                     }
                     applyFilters();
                 });
@@ -251,19 +243,20 @@
             noResults.classList.add('hidden');
             
             grid.innerHTML = filteredProjects.map((project, index) => `
-                <article class="project-card rounded-3xl overflow-hidden flex flex-col h-full fade-in" style="animation-delay: ${index * 0.05}s">
-                    <div class="aspect-video relative overflow-hidden bg-white/5">
-                        <img src="${project.imagen}" alt="${project.nombre}" onerror="this.src='https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=800'" class="w-full h-full object-cover opacity-60">
+                <article class="cyber-card rounded-2xl overflow-hidden flex flex-col h-full fade-in" style="animation-delay: ${index * 0.1}s">
+                    <div class="aspect-video relative overflow-hidden bg-secondary">
+                        <img src="${project.imagen}" alt="${project.nombre}" onerror="this.src='https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=800'" class="w-full h-full object-cover opacity-40 transition-opacity">
+                        <div class="absolute inset-0 bg-gradient-to-t from-primary to-transparent"></div>
                     </div>
-                    <div class="p-8 flex flex-col flex-grow">
-                        <h2 class="text-2xl font-bold text-white mb-2 leading-tight">${project.nombre}</h2>
-                        <p class="text-gray-500 text-sm mb-6 flex-grow line-clamp-2 leading-relaxed">${project.descripcion}</p>
+                    <div class="p-8 flex flex-col flex-grow relative">
+                        <h2 class="font-display text-xl font-bold text-white mb-3 leading-tight tracking-wide">${project.nombre}</h2>
+                        <p class="text-gray-400 text-sm mb-6 flex-grow line-clamp-3 leading-relaxed">${project.descripcion}</p>
                         <div class="flex flex-wrap gap-2 mb-8">
-                            ${project.tecnologias.map(tech => `<span class="tech-pill px-2 py-1 rounded-md font-bold uppercase tracking-tighter">${tech}</span>`).join('')}
+                            ${project.tecnologias.map(tech => `<span class="px-2 py-1 bg-accent/10 border border-accent/20 rounded text-[9px] font-bold uppercase text-accent/80">${tech}</span>`).join('')}
                         </div>
                         <div class="flex gap-3">
-                            ${project.github ? `<a href="${project.github}" target="_blank" class="flex-1 py-4 glass rounded-2xl text-center text-[10px] font-bold uppercase tracking-widest hover:bg-white/5 hover:text-indigo-400 transition-all"><i class="fab fa-github mr-2"></i>Github</a>` : ''}
-                            ${project.demo ? `<a href="${project.demo}" target="_blank" class="flex-1 py-4 bg-indigo-500/10 text-indigo-300 border border-indigo-500/20 rounded-2xl text-center text-[10px] font-bold uppercase tracking-widest hover:bg-indigo-500/20 transition-all">Demo Live</a>` : ''}
+                            ${project.github ? `<a href="${project.github}" target="_blank" class="flex-1 py-3 bg-secondary border border-accent/20 rounded-xl text-center text-[10px] font-bold uppercase tracking-widest hover:bg-accent/10 hover:border-accent transition-all"><i class="fab fa-github mr-2"></i>Github</a>` : ''}
+                            ${project.demo ? `<a href="${project.demo}" target="_blank" class="flex-1 py-3 bg-accent text-white rounded-xl text-center text-[10px] font-bold uppercase tracking-widest hover:bg-accentLight transition-all shadow-lg shadow-accent/20">WEB</a>` : ''}
                         </div>
                     </div>
                 </article>
@@ -298,10 +291,14 @@
         document.getElementById('resetFilters').addEventListener('click', () => {
             searchInput.value = '';
             activeTech = null;
+            document.querySelectorAll('.tech-filter').forEach(b => b.classList.remove('bg-accent/20', 'text-accent', 'border-accent'));
             applyFilters();
         });
 
         window.onload = fetchProjects;
     </script>
+
+    <script data-goatcounter="https://alherrero.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>

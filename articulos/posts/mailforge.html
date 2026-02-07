@@ -1,169 +1,21 @@
 <!DOCTYPE html>
-<html lang="es" class="scroll-smooth">
-
+<html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cargando... | Alherrero</title>
-    <link rel="icon" href="../../logo.png" type="image/png">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
-
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&family=JetBrains+Mono:wght@400;500&display=swap');
-
-        body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: #050505;
-            color: #fafafa;
-        }
-
-        .code-font { font-family: 'JetBrains Mono', monospace; }
-
-        .glass {
-            background: rgba(255, 255, 255, 0.02);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .progress-bar {
-            position: fixed; top: 0; left: 0; height: 2px;
-            background: linear-gradient(90deg, #818cf8, #c084fc);
-            z-index: 100; width: 0%; transition: width 0.1s ease;
-        }
-
-        /* ESTILOS DE CONTENIDO MARKDOWN */
-        #markdown-content { line-height: 1.8; color: #a1a1aa; font-size: 1.1rem; }
-        
-        #markdown-content h1, #markdown-content h2, #markdown-content h3 { 
-            color: #ffffff; font-weight: 800; tracking: -0.02em; margin-top: 2.5rem; margin-bottom: 1.5rem;
-        }
-        
-        #markdown-content h2 { font-size: 1.75rem; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 0.5rem; }
-        
-        #markdown-content p { margin-bottom: 1.5rem; }
-        
-        #markdown-content strong { color: #ffffff; }
-
-        #markdown-content pre {
-            background: rgba(255, 255, 255, 0.02) !important;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            padding: 1.5rem; border-radius: 1rem; margin: 2rem 0; overflow-x: auto;
-        }
-
-        #markdown-content code:not(pre code) {
-            background: rgba(129, 140, 248, 0.1);
-            color: #a5b4fc; padding: 0.2rem 0.4rem; border-radius: 0.4rem; font-size: 0.9em;
-        }
-
-        #markdown-content blockquote {
-            border-left: 3px solid #818cf8; background: rgba(129, 140, 248, 0.03);
-            padding: 1.5rem; border-radius: 0 1rem 1rem 0; font-style: italic; margin: 2rem 0;
-        }
-
-        #markdown-content img { border-radius: 1rem; border: 1px solid rgba(255,255,255,0.05); margin: 3rem auto; }
-
-        #markdown-content a { color: #818cf8; text-decoration: none; border-bottom: 1px dashed #818cf8; transition: all 0.3s; }
-        #markdown-content a:hover { color: #c084fc; border-color: #c084fc; }
-
-        .table-container { overflow-x: auto; margin: 2rem 0; border-radius: 1rem; border: 1px solid rgba(255,255,255,0.05); }
-        table { width: 100%; border-collapse: collapse; background: rgba(255,255,255,0.01); }
-        th { background: rgba(255,255,255,0.03); padding: 1rem; text-align: left; color: #818cf8; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em; }
-        td { padding: 1rem; border-top: 1px solid rgba(255,255,255,0.05); font-size: 0.95rem; }
-    </style>
-</head>
-
-<body class="antialiased">
-    <div class="progress-bar" id="readingProgress"></div>
-
-    <nav class="fixed w-full z-50 top-0 bg-black/60 backdrop-blur-md border-b border-white/5">
-        <div class="max-w-4xl mx-auto px-6 h-16 flex items-center justify-between">
-            <a href="../index.html" class="code-font text-xs font-bold uppercase tracking-widest text-gray-500 hover:text-white transition-colors">
-                <i class="fas fa-arrow-left mr-2"></i> Volver
-            </a>
-            <div id="postCategory" class="text-[10px] font-bold uppercase tracking-[0.2em] text-indigo-400/60">RESEARCH</div>
-        </div>
-    </nav>
-
-    <main class="pt-32 pb-24 px-6">
-        <article class="max-w-3xl mx-auto">
-            <header class="mb-16">
-                <div class="flex items-center gap-3 text-xs font-bold text-gray-500 uppercase tracking-widest mb-6">
-                    <span id="postDate">20/01/2026</span>
-                    <span class="w-1 h-1 rounded-full bg-gray-700"></span>
-                    <span>Lectura estimada 5 min</span>
-                </div>
-                <h1 id="postTitle" class="text-4xl md:text-6xl font-extrabold text-white mb-8 tracking-tighter leading-[1.1]">
-                    Cargando artículo...
-                </h1>
-                <div class="h-1 w-20 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full"></div>
-            </header>
-
-            <div id="markdown-content">
-                <div class="py-20 text-center">
-                    <div class="inline-block w-6 h-6 border-2 border-indigo-500/30 border-t-indigo-500 rounded-full animate-spin"></div>
-                </div>
-            </div>
-        </article>
-    </main>
-
-    <footer class="py-12 border-t border-white/5 text-center text-[10px] font-bold text-gray-600 uppercase tracking-widest">
-        &copy; 2026 Alejandro Herrero Raboso • Pentesting & Security
-    </footer>
-
+    <title>Redireccionando...</title>
     <script>
-        const POST_ID = '1'; 
+        window.onload = function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const id = urlParams.get('id');
+            
+            // Base de la nueva URL
+            let nuevaUrl = "https://alherrero.github.io/blog/posts/mailforge.html";
 
-        const renderer = new marked.Renderer();
-        renderer.table = (header, body) => `<div class="table-container"><table><thead>${header}</thead><tbody>${body}</tbody></table></div>`;
-        marked.setOptions({ renderer: renderer, breaks: true, gfm: true });
-
-        async function loadPost() {
-            try {
-                const response = await fetch('../posts.json');
-                const posts = await response.json();
-                const postData = posts.find(p => p.id == POST_ID);
-
-                if (!postData) throw new Error("Post no encontrado");
-
-                document.getElementById('postTitle').innerText = postData.titulo;
-                document.title = `${postData.titulo} | Alherrero`;
-                document.getElementById('postCategory').innerText = postData.categoria || 'RESEARCH';
-                if (postData.fecha) document.getElementById('postDate').innerText = postData.fecha;
-
-                const mdResponse = await fetch(`../markdown/${POST_ID}.md`);
-                if (!mdResponse.ok) throw new Error("No se pudo cargar el archivo MD");
-                const mdText = await mdResponse.text();
-
-                document.getElementById('markdown-content').innerHTML = marked.parse(mdText);
-
-                document.querySelectorAll('#markdown-content pre code').forEach((block) => {
-                    hljs.highlightElement(block);
-                });
-
-            } catch (error) {
-                console.error(error);
-                document.getElementById('markdown-content').innerHTML = `
-                    <div class="text-center py-20 glass rounded-3xl">
-                        <p class="text-red-400 font-bold uppercase tracking-widest text-xs">Error de carga</p>
-                        <p class="text-gray-500 mt-2">No se pudo encontrar el artículo solicitado.</p>
-                        <a href="../index.html" class="mt-6 inline-block text-white font-bold text-xs underline">Volver al blog</a>
-                    </div>
-                `;
-            }
-        }
-
-        window.onscroll = () => {
-            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-            const scrolled = (winScroll / height) * 100;
-            document.getElementById("readingProgress").style.width = scrolled + "%";
+            window.location.href = nuevaUrl;
         };
-
-        window.onload = loadPost;
     </script>
+</head>
+<body>
+    <p>Si no eres redirigido automáticamente, <a href="https://alherrero.github.io/blog/posts/mailforge.html">haz clic aquí</a>.</p>
 </body>
 </html>

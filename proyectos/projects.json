@@ -1,5 +1,14 @@
 [
   {
+    "id": 2,
+    "nombre": "Malendar",
+    "descripcion": "Malendar es una aplicación web para organizar y seguir máquinas y labs de ciberseguridad (HTB, TryHackMe, VulnHub), con estado, dificultad, sistema y notas.",
+    "tecnologias": ["WEB"],
+    "imagen": "img/malendar.png",
+    "demo": "https://alherrero.github.io/malendar/",
+    "github": "https://github.com/Alherrero/malendar"
+  },
+  {
     "id": 1,
     "nombre": "Entorno BSPWM 2026",
     "descripcion": "Entorno de escritorio minimalista basado en BSPWM optimizado para flujo de trabajo de pentesting profesional.",

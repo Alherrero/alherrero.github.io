@@ -1,136 +1,344 @@
 <!DOCTYPE html>
-<html lang="es" class="scroll-smooth">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Alherrero</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="navbar.css">
     <link rel="icon" href="logo.png" type="image/png">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Orbitron:wght@700;800;900&display=swap"
+        rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#0a0612',
+                        secondary: '#0a1520',
+                        card: '#12202e',
+                        accent: '#3b82f6',
+                        accentLight: '#60a5fa',
+                        accentDark: '#2563eb',
+                        circuit: '#1d4ed8',
+                    },
+                    fontFamily: {
+                        sans: ['JetBrains Mono', 'monospace'],
+                        display: ['Orbitron', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
     <style>
-        .logo {
-            height: 50px;
-            width: auto;
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-20px);
+            }
         }
 
-        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&family=JetBrains+Mono:wght@400&display=swap');
+        @keyframes pulse {
 
-        body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: #050505;
-            color: #fafafa;
+            0%,
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+
+            50% {
+                opacity: 0.6;
+                transform: scale(1.1);
+            }
         }
 
-        .code-font {
-            font-family: 'JetBrains Mono', monospace;
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
         }
 
-        .glass-card {
-            background: rgba(255, 255, 255, 0.02);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
-        .blog-primary {
-            background: linear-gradient(135deg, rgba(129, 140, 248, 0.1) 0%, rgba(192, 132, 252, 0.05) 100%);
-            border: 1px solid rgba(129, 140, 248, 0.3);
+        .circuit-pattern {
+            background-image:
+                linear-gradient(90deg, rgba(59, 130, 246, 0.05) 1px, transparent 1px),
+                linear-gradient(rgba(59, 130, 246, 0.05) 1px, transparent 1px);
+            background-size: 50px 50px;
         }
 
-        .blog-primary:hover {
-            border-color: rgba(129, 140, 248, 0.6);
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(129, 140, 248, 0.1);
+        .animate-slide-down {
+            animation: slideDown 0.6s ease-out;
         }
 
-        .tech-tag {
-            font-size: 0.65rem;
-            padding: 4px 10px;
-            border-radius: 6px;
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            color: #94a3b8;
+        .animate-fade-up {
+            animation: fadeInUp 0.8s ease-out both;
+        }
+
+        .animate-pulse-glow {
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .animate-float {
+            animation: float 8s ease-in-out infinite;
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #3b82f6, #06b6d4, #60a5fa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
         }
     </style>
 </head>
 
-<body class="selection:bg-indigo-500/30">
+<body class="bg-primary text-gray-100 overflow-x-hidden">
 
-    <nav class="fixed w-full z-50 top-0 bg-black/50 backdrop-blur-md border-b border-white/5">
-        <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-            <img src="logo.png" alt="alherrero" class="inline-block h-4 align-middle" />
-            <div class="flex gap-6 text-xs font-bold uppercase tracking-widest text-gray-400">
-                <a href="https://github.com/alherrero" target="_blank" class="hover:text-white"><i
-                        class="fab fa-github text-lg"></i></a>
+    <!-- Background Effects -->
+    <div class="fixed inset-0 circuit-pattern -z-10 opacity-40"></div>
+    <div
+        class="fixed w-[600px] h-[600px] -top-[300px] -right-[300px] bg-gradient-radial from-accent/15 to-transparent rounded-full blur-3xl -z-10 animate-float">
+    </div>
+    <div class="fixed w-[500px] h-[500px] -bottom-[250px] -left-[250px] bg-gradient-radial from-circuit/15 to-transparent rounded-full blur-3xl -z-10 animate-float"
+        style="animation-delay: 4s;"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full backdrop-blur-xl bg-primary/90 border-b border-accent/20 z-50 animate-slide-down">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12 py-4 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <img src="logo.png" alt="Logo Alejandro Herrero" class="w-10 h-10 rounded-lg">
+                <span class="font-display font-black text-lg tracking-[0.2em] gradient-text">ALHERRERO</span>
+            </div>
+
+            <div class="hidden md:flex items-center gap-6">
+                <a href="blog"
+                    class="px-4 py-2 bg-accent/20 border border-accent/40 rounded-lg text-accent hover:bg-accent/30 transition-all duration-300 font-semibold text-sm">Mi
+                    Blog</a>
+                <a href="https://github.com/alherrero" target="_blank"
+                    class="text-gray-300 hover:text-accent transition-colors duration-300">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                        <path
+                            d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                    </svg>
+                </a>
             </div>
         </div>
     </nav>
 
-    <main class="max-w-6xl mx-auto px-6 pt-32 pb-20">
-        <div class="grid lg:grid-cols-12 gap-6">
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-6 lg:px-12 pt-28 pb-20">
 
-            <section id="inicio" class="lg:col-span-8 glass-card p-10 rounded-3xl space-y-6">
-                <div class="space-y-2">
-                    <h1 class="text-5xl font-extrabold tracking-tighter">
-                        Alejandro <span class="text-indigo-400">Herrero Raboso</span>
-                    </h1>
-                    <div class="flex flex-wrap gap-2 pt-2">
-                        <span class="tech-tag code-font">LINUX</span>
-                        <span class="tech-tag code-font">PYTHON</span>
-                        <span class="tech-tag code-font">BASH</span>
-                        <span class="tech-tag code-font">BURP SUITE</span>
-                    </div>
-                </div>
+        <!-- Hero Section -->
+        <section id="inicio" class="mb-8 animate-fade-up" style="animation-delay: 0.2s;">
+            <!--
+            <div class="mb-4">
+                <span class="inline-block px-4 py-1 bg-accent/10 border border-accent/30 rounded-full text-accent text-xs font-bold tracking-wider mb-6">
+                    TEXTO
+                </span>
+            </div>
+            -->
+            <h1 class="font-display text-5xl lg:text-6xl font-black leading-tight mb-4 gradient-text">
+                Alejandro Herrero Raboso
+            </h1>
+            <div class="flex items-center gap-3 mb-6">
+                <span class="w-2 h-2 bg-accent rounded-full animate-pulse-glow"></span>
+                <span class="text-xl text-gray-300 font-semibold">Pentester</span>
+            </div>
+        </section>
 
-                <div class="text-gray-400 leading-relaxed space-y-4 text-lg">
+        <!-- About Section -->
+        <section id="sobre-mi" class="mb-8">
+            <h2 class="text-2xl font-display font-bold mb-8 text-gray-200 flex items-center gap-3 animate-fade-up">
+                <span class="w-8 h-0.5 bg-accent"></span>
+                Sobre mí
+            </h2>
+            <div class="grid lg:grid-cols-1 gap-12 animate-fade-up" style="animation-delay: 0.1s;">
+                <div class="space-y-5 text-gray-300 leading-relaxed text-justify text-base">
                     <p>
                         Soy Alejandro, un entusiasta de la ciberseguridad al que le gusta aprender algo nuevo cada día.
-                        Me centro principalmente en el <span class="text-white">pentesting web</span> y cuento con
-                        experiencia reportando varias vulnerabilidades a empresas.
+                        Me centro principalmente en el pentesting web y cuento con experiencia reportando varias
+                        vulnerabilidades a empresas.
                     </p>
                     <p>
-                        Trabajo con <span class="text-white">Windows y Linux</span>, y creo mis propios laboratorios en
-                        máquinas virtuales. Desarrollo herramientas en <span class="text-yellow-500/80">Python</span> y
-                        <span class="text-indigo-400">Bash</span>, y realizo proyectos personales de forma constante
-                        para reforzar mis habilidades.
+                        Trabajo con Windows y Linux, y creo mis propios laboratorios en máquinas virtuales. Desarrollo
+                        herramientas en Python y Bash, y realizo proyectos personales de forma constante para reforzar
+                        mis habilidades.
                     </p>
                     <p>
                         Aprendo rápido, me adapto con facilidad a nuevos desafíos y siempre busco maneras de mejorar y
                         crecer en el ámbito del pentesting.
                     </p>
                 </div>
-            </section>
-
-            <div class="lg:col-span-4 grid grid-rows-2 gap-6">
-                <a href="articulos"
-                    class="glass-card blog-primary p-8 rounded-3xl flex flex-col justify-center items-center text-center group">
-                    <div
-                        class="w-14 h-14 bg-indigo-500/20 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                        <i class="fas fa-book-open text-2xl text-indigo-400"></i>
-                    </div>
-                    <h2 class="text-2xl font-bold mb-2">Mi Blog</h2>
-                    <p class="text-sm text-indigo-200/50">Investigaciones y Writeups</p>
-                    <i
-                        class="fas fa-arrow-right mt-6 text-indigo-400 opacity-0 group-hover:opacity-100 transition-all"></i>
-                </a>
-
-                <a href="proyectos"
-                    class="glass-card p-8 rounded-3xl flex flex-col justify-center items-center text-center group hover:bg-white/5">
-                    <div class="w-12 h-12 bg-white/5 rounded-2xl flex items-center justify-center mb-4">
-                        <i class="fas fa-code text-xl text-gray-400"></i>
-                    </div>
-                    <h2 class="text-xl font-bold mb-1">Proyectos</h2>
-                    <p class="text-xs text-gray-500">Labs & Tools</p>
-                </a>
             </div>
-        </div>
+
+        </section>
+
+        <!-- Blog & Projects Section -->
+        <section class="mb-16">
+            <!--
+            <h2 class="text-2xl font-display font-bold mb-8 text-gray-200 flex items-center gap-3 animate-fade-up">
+                <span class="w-8 h-0.5 bg-accent"></span>
+                Contenido & Proyectos
+            </h2>
+            -->
+            <div class="grid lg:grid-cols-2 gap-8">
+
+                <!-- Blog Card -->
+                <a href="blog"
+                    class="group relative p-8 bg-gradient-to-br from-card/80 to-secondary/80 backdrop-blur-sm border-2 border-accent/30 rounded-2xl overflow-hidden transition-all duration-500 hover:-translate-y-2 hover:border-accent hover:shadow-xl hover:shadow-accent/20 animate-fade-up"
+                    style="animation-delay: 0.2s;">
+
+                    <div class="absolute top-0 right-0 w-32 h-32 opacity-10">
+                        <svg viewBox="0 0 200 200" class="w-full h-full">
+                            <line x1="20" y1="20" x2="180" y2="20" stroke="#3b82f6" stroke-width="2"
+                                stroke-dasharray="5,5">
+                                <animate attributeName="stroke-dashoffset" from="10" to="0" dur="2s"
+                                    repeatCount="indefinite" />
+                            </line>
+                            <circle cx="50" cy="20" r="3" fill="#3b82f6" />
+                            <circle cx="120" cy="20" r="3" fill="#3b82f6" />
+                        </svg>
+                    </div>
+
+                    <div class="relative z-10">
+                        <h3 class="font-display text-3xl font-black mb-3 gradient-text">Mi Blog</h3>
+            
+                        <div
+                            class="inline-flex items-center gap-2 text-accent font-semibold text-sm transition-all duration-300 group-hover:gap-3">
+                            <span>Explorar Artículos</span>
+                            <span>→</span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Projects Card -->
+                <a href="proyectos"
+                    class="group relative p-8 bg-gradient-to-br from-card/60 to-secondary/60 backdrop-blur-sm border border-accent/20 rounded-2xl overflow-hidden transition-all duration-500 hover:-translate-y-2 hover:border-accent/60 hover:shadow-xl hover:shadow-accent/10 animate-fade-up"
+                    style="animation-delay: 0.4s;">
+
+                    <div class="relative z-10">
+                        <h3 class="font-display text-3xl font-black mb-3 text-gray-100">Proyectos</h3>
+
+                        <div
+                            class="inline-flex items-center gap-2 text-accent font-semibold text-sm transition-all duration-300 group-hover:gap-3">
+                            <span>Ver Proyectos</span>
+                            <span>→</span>
+                        </div>
+                    </div>
+                </a>
+
+            </div>
+        </section>
+
+        <!-- Technologies Section -->
+        <section id="tecnologias" class="mb-24">
+            <h2 class="text-2xl font-display font-bold mb-8 text-gray-200 flex items-center gap-3 animate-fade-up">
+                <span class="w-8 h-0.5 bg-accent"></span>
+                Tecnologías & Herramientas
+            </h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 animate-fade-up" style="animation-delay: 0.1s;">
+
+                <div
+                    class="group p-6 bg-gradient-to-br from-accent/10 to-circuit/10 border border-accent/20 rounded-2xl transition-all duration-300 hover:-translate-y-2 hover:border-accent hover:shadow-lg hover:shadow-accent/20">
+                    <div class="flex flex-col items-center text-center gap-4">
+                        <div class="w-16 h-16 flex items-center justify-center">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg"
+                                alt="Linux" class="w-14 h-14">
+                        </div>
+                        <span class="font-bold text-lg text-gray-200">Linux</span>
+                    </div>
+                </div>
+
+                <div
+                    class="group p-6 bg-gradient-to-br from-accent/10 to-circuit/10 border border-accent/20 rounded-2xl transition-all duration-300 hover:-translate-y-2 hover:border-accent hover:shadow-lg hover:shadow-accent/20">
+                    <div class="flex flex-col items-center text-center gap-4">
+                        <div class="w-16 h-16 flex items-center justify-center">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg"
+                                alt="Python" class="w-14 h-14">
+                        </div>
+                        <span class="font-bold text-lg text-gray-200">Python</span>
+                    </div>
+                </div>
+
+                <div
+                    class="group p-6 bg-gradient-to-br from-accent/10 to-circuit/10 border border-accent/20 rounded-2xl transition-all duration-300 hover:-translate-y-2 hover:border-accent hover:shadow-lg hover:shadow-accent/20">
+                    <div class="flex flex-col items-center text-center gap-4">
+                        <div class="w-16 h-16 flex items-center justify-center">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bash/bash-original.svg"
+                                alt="Bash" class="w-14 h-14">
+                        </div>
+                        <span class="font-bold text-lg text-gray-200">Bash</span>
+                    </div>
+                </div>
+
+                <div
+                    class="group p-6 bg-gradient-to-br from-accent/10 to-circuit/10 border border-accent/20 rounded-2xl transition-all duration-300 hover:-translate-y-2 hover:border-accent hover:shadow-lg hover:shadow-accent/20">
+                    <div class="flex flex-col items-center text-center gap-4">
+                        <div class="w-16 h-16 flex items-center justify-center">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git"
+                                class="w-14 h-14">
+                        </div>
+                        <span class="font-bold text-lg text-gray-200">Git</span>
+                    </div>
+                </div>
+                
+            </div>
+        </section>
     </main>
 
-    <footer class="text-center py-10 border-t border-white/5">
-        <p class="text-xs code-font text-gray-600">© 2026 Alejandro Herrero Raboso</p>
+    <!-- Footer -->
+    <footer class="border-t border-accent/20 py-8">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12">
+            <div class="flex justify-center items-center">
+                <p class="text-gray-500 text-sm font-mono text-center">
+                    © 2026 Alejandro Herrero Raboso
+                </p>
+            </div>
+        </div>
     </footer>
 
+    <script data-goatcounter="https://alherrero.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
 </body>
 
 </html>
