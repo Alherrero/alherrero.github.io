@@ -1,0 +1,28 @@
+/* Estilo del Scrollbar General (Navegador) */
+::-webkit-scrollbar {
+    width: 10px; /* Ancho de la barra */
+    background-color: #0a0612; /* Color de fondo (primary) */
+}
+
+/* El "tirador" de la barra */
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #3b82f6 0%, #2563eb 100%); /* Degradado accent */
+    border-radius: 5px;
+    border: 2px solid #0a0612; /* Crea un efecto de separación */
+}
+
+/* Efecto hover al pasar el ratón */
+::-webkit-scrollbar-thumb:hover {
+    background: #60a5fa; /* accentLight */
+}
+
+/* La pista (fondo por donde se mueve) */
+::-webkit-scrollbar-track {
+    background: #0a1520; /* secondary */
+}
+
+/* Soporte para Firefox */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: #3b82f6 #0a0612;
+}

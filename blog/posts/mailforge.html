@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cargando... | Alherrero</title>
+    <link rel="icon" href="../../logo.png" type="image/png">
+    <link rel="stylesheet" href="../../navbar.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Orbitron:wght@700;800;900&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/tokyo-night-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#0a0612',
+                        secondary: '#0a1520',
+                        card: '#12202e',
+                        accent: '#3b82f6',
+                        accentLight: '#60a5fa',
+                        circuit: '#1d4ed8',
+                    },
+                    fontFamily: {
+                        sans: ['JetBrains Mono', 'monospace'],
+                        display: ['Orbitron', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+
+    <style>
+        .circuit-pattern {
+            background-image: linear-gradient(90deg, rgba(59, 130, 246, 0.05) 1px, transparent 1px),
+                              linear-gradient(rgba(59, 130, 246, 0.05) 1px, transparent 1px);
+            background-size: 50px 50px;
+        }
+        
+        .progress-bar {
+            position: fixed; top: 0; left: 0; height: 3px;
+            background: linear-gradient(90deg, #3b82f6, #06b6d4);
+            z-index: 100; width: 0%; transition: width 0.1s ease;
+        }
+
+        /* DISEÑO DE CONTENIDO MARKDOWN */
+        #markdown-content { line-height: 1.8; color: #9ca3af; font-size: 1.05rem; }
+        
+        #markdown-content h1, #markdown-content h2, #markdown-content h3 { 
+            font-family: 'Orbitron', sans-serif; color: #ffffff; font-weight: 700; margin-top: 3rem; margin-bottom: 1.5rem; letter-spacing: 0.05em;
+        }
+        
+        #markdown-content h2 { font-size: 1.5rem; border-left: 4px solid #3b82f6; padding-left: 1rem; }
+        #markdown-content p { margin-bottom: 1.5rem; text-align: justify; }
+        #markdown-content strong { color: #93c5fd; }
+
+        /* CORRECCIÓN DE BLOQUES DE CÓDIGO (PRE) */
+        #markdown-content pre {
+            background-color: #0d0915 !important;
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            margin: 2rem 0;
+            overflow-x: auto;
+            display: block;
+            width: 100%;
+            box-shadow: inset 0 2px 10px rgba(0,0,0,0.5);
+        }
+
+        #markdown-content pre code {
+            font-family: 'JetBrains Mono', monospace !important;
+            background: transparent !important;
+            padding: 0 !important;
+            font-size: 0.9rem;
+            color: #dbeafe;
+            display: block;
+            white-space: pre;
+        }
+
+        /* Código en línea */
+        #markdown-content :not(pre) > code {
+            background: rgba(59, 130, 246, 0.15);
+            color: #60a5fa;
+            padding: 0.2rem 0.5rem;
+            border-radius: 0.4rem;
+            font-size: 0.9em;
+        }
+
+        #markdown-content blockquote {
+            border-left: 4px solid #3b82f6; background: rgba(18, 32, 46, 0.4);
+            padding: 1.5rem; border-radius: 0 1rem 1rem 0; font-style: italic; margin: 2rem 0;
+        }
+
+        #markdown-content img { border-radius: 1rem; border: 1px solid rgba(59, 130, 246, 0.2); margin: 3rem auto; max-width: 100%; }
+
+        #markdown-content a { color: #60a5fa; text-decoration: none; border-bottom: 1px solid rgba(96, 165, 250, 0.3); transition: all 0.3s; }
+        #markdown-content a:hover { color: #ffffff; border-color: #ffffff; background: rgba(59, 130, 246, 0.1); }
+
+        /* Scrollbar personalizado para bloques de código */
+        #markdown-content pre::-webkit-scrollbar { height: 6px; }
+        #markdown-content pre::-webkit-scrollbar-thumb { 
+            background: rgba(59, 130, 246, 0.3); 
+            border-radius: 10px; 
+        }
+    </style>
+</head>
+
+<body class="bg-primary text-gray-100 antialiased selection:bg-accent/30">
+    <div class="fixed inset-0 circuit-pattern -z-10 opacity-40"></div>
+    <div class="progress-bar" id="readingProgress"></div>
+
+    <nav class="fixed w-full z-50 top-0 bg-primary/80 backdrop-blur-xl border-b border-accent/20">
+        <div class="max-w-5xl mx-auto px-6 h-16 flex items-center justify-between">
+            <a href="../index.html" class="font-sans text-[10px] font-bold uppercase tracking-widest text-gray-400 hover:text-accent transition-colors">
+                <i class="fas fa-arrow-left mr-2 text-[8px]"></i> Volver al Blog
+            </a>
+            <div id="postCategory" class="text-[10px] font-bold uppercase tracking-[0.2em] text-accent px-3 py-1 bg-accent/10 border border-accent/20 rounded-full">
+                RESEARCH
+            </div>
+        </div>
+    </nav>
+
+    <main class="pt-32 pb-24 px-6">
+        <article class="max-w-4xl mx-auto">
+            <header class="mb-16">
+                <div class="flex items-center gap-3 text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-6">
+                    <span id="postDate">28/01/2026</span>
+                    <span class="w-1 h-1 rounded-full bg-accent/40"></span>
+                    <span id="readingTime">Lectura estimada -- min</span>
+                </div>
+                <h1 id="postTitle" class="font-display text-4xl md:text-6xl font-black text-white mb-8 tracking-tight leading-[1.1]">
+                    Cargando artículo...
+                </h1>
+                <div class="h-1.5 w-24 bg-gradient-to-r from-accent to-circuit rounded-full"></div>
+            </header>
+
+            <div id="markdown-content" class="font-sans">
+                <div class="py-20 text-center">
+                    <div class="inline-block w-8 h-8 border-2 border-accent/20 border-t-accent rounded-full animate-spin"></div>
+                </div>
+            </div>
+        </article>
+    </main>
+
+    <footer class="py-12 border-t border-accent/10 text-center text-[10px] font-sans font-bold text-gray-600 uppercase tracking-[0.3em]">
+        © 2026 Alejandro Herrero Raboso 
+    </footer>
+
+    <script>
+        // Configuración de POST_ID (este valor cambia según el artículo)
+        const POST_ID = '1'; 
+
+        // Configuración de Marked con Highlight.js
+        const renderer = new marked.Renderer();
+        
+        // Tablas con scroll automático
+        renderer.table = (header, body) => `
+            <div class="overflow-x-auto my-8 border border-accent/20 rounded-xl">
+                <table class="w-full text-left text-sm">
+                    <thead class="bg-accent/10 text-accent uppercase text-[10px] tracking-widest">
+                        ${header}
+                    </thead>
+                    <tbody class="divide-y divide-accent/10">
+                        ${body}
+                    </tbody>
+                </table>
+            </div>`;
+
+        marked.setOptions({ 
+            renderer: renderer, 
+            breaks: true, 
+            gfm: true 
+        });
+
+        async function loadPost() {
+            try {
+                // 1. Cargar metadatos desde posts.json
+                const response = await fetch('../posts.json');
+                const posts = await response.json();
+                const postData = posts.find(p => p.id == POST_ID);
+
+                if (!postData) throw new Error("Post no encontrado");
+
+                // Actualizar interfaz
+                document.getElementById('postTitle').innerText = postData.titulo;
+                document.title = `${postData.titulo} | Alherrero`;
+                document.getElementById('postCategory').innerText = postData.categoria || 'RESEARCH';
+                if (postData.fecha) document.getElementById('postDate').innerText = postData.fecha;
+
+                // 2. Cargar el archivo Markdown
+                const mdResponse = await fetch(`../markdown/${POST_ID}.md`);
+                if (!mdResponse.ok) throw new Error("Archivo .md no disponible");
+                const mdText = await mdResponse.text();
+
+                // 3. Calcular tiempo de lectura
+                const words = mdText.split(/\s+/g).length;
+                const minutes = Math.ceil(words / 200);
+                document.getElementById('readingTime').innerText = `Lectura estimada ${minutes} min`;
+
+                // 4. Renderizar Markdown y aplicar Highlight.js
+                const container = document.getElementById('markdown-content');
+                container.innerHTML = marked.parse(mdText);
+
+                container.querySelectorAll('pre code').forEach((block) => {
+                    hljs.highlightElement(block);
+                });
+
+            } catch (error) {
+                console.error(error);
+                document.getElementById('markdown-content').innerHTML = `
+                    <div class="text-center py-20 bg-secondary/30 border border-red-500/20 rounded-3xl backdrop-blur-xl">
+                        <p class="text-red-400 font-bold uppercase tracking-widest text-xs">Error de conexión</p>
+                        <p class="text-gray-500 mt-2 font-sans">No se pudo recuperar el contenido del laboratorio.</p>
+                        <a href="../index.html" class="mt-6 inline-block text-accent font-bold text-[10px] uppercase tracking-widest hover:underline transition-all">Regresar al terminal</a>
+                    </div>
+                `;
+            }
+        }
+
+        // Barra de progreso de lectura
+        window.onscroll = () => {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById("readingProgress").style.width = scrolled + "%";
+        };
+
+        window.onload = loadPost;
+    </script>
+
+    <script data-goatcounter="https://alherrero.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
