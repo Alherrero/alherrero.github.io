@@ -1,0 +1,52 @@
+[
+  {
+    "p": "¿Cuál es el puerto por defecto utilizado por Kerberos en un entorno de Active Directory?",
+    "o": [
+      "TCP/UDP 88",
+      "TCP/UDP 445",
+      "TCP 389",
+      "TCP 3268"
+    ],
+    "a": 0
+  },
+  {
+    "p": "Para realizar un ataque de DCSync y extraer hashes de contraseñas, ¿qué privilegios específicos se requieren habitualmente?",
+    "o": [
+      "Domain Users",
+      "Replicating Directory Changes",
+      "Print Operators",
+      "Account Operators"
+    ],
+    "a": 1
+  },
+  {
+    "p": "Al enumerar un dominio, ¿qué herramienta es estándar para visualizar gráficamente las rutas de ataque y relaciones de confianza?",
+    "o": [
+      "PowerView",
+      "BloodHound",
+      "Responder",
+      "Sharphound"
+    ],
+    "a": 1
+  },
+  {
+    "p": "¿Qué técnica permite a un atacante persistir en el dominio mediante la creación de un ticket TGT falso?",
+    "o": [
+      "Silver Ticket",
+      "Golden Ticket",
+      "AS-REP Roasting",
+      "Pass-the-Hash"
+    ],
+    "a": 1
+  },
+  {
+    "p": "¿En qué puerto escucha el servicio Global Catalog (GC) de Active Directory por defecto?",
+    "o": [
+      "389",
+      "636",
+      "3268",
+      "3269"
+    ],
+    "a": 2
+  }
+]

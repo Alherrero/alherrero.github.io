@@ -1,0 +1,11 @@
+[
+  {
+    "id": 1,
+    "titulo": "Windows Pentest",
+    "categoria": "AD",
+    "preguntasFile": "preguntas/ad1.json",
+    "imagen": "",
+    "descripcion": "Fundamentos de enumeración y ataques básicos a controladores de dominio.",
+    "dificultad": "Fácil"
+  }
+]

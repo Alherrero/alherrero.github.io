@@ -264,8 +264,7 @@
             grid.innerHTML = posts.map((post, index) => `
                 <article class="cyber-card rounded-2xl overflow-hidden flex flex-col h-full fade-in" style="animation-delay: ${index * 0.1}s">
                     <div class="aspect-video relative overflow-hidden bg-secondary">
-                        <img src="${post.imagen}" alt="${post.titulo}" onerror="this.src='https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=800'" class="w-full h-full object-cover opacity-40">
-                        <div class="absolute inset-0 bg-gradient-to-t from-primary to-transparent"></div>
+                        <img src="${post.imagen}" alt="${post.titulo}" onerror="this.src='https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=800'" class="w-full h-full object-cover">
                         <div class="absolute top-4 left-4">
                             <span class="px-2 py-1 bg-accent/20 border border-accent/30 rounded text-[10px] font-bold uppercase text-accent">${post.categoria}</span>
                         </div>
