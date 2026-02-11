@@ -1,5 +1,13 @@
 [
     {
+        "id": "9",
+        "titulo": "Nunchucks",
+        "descripcion": "Writeup de la máquina Nunchucks de dificultad fácil de la plataforma HackTheBox.",
+        "imagen": "imgArticulos/nunchucks.jpg",
+        "categoria": "HackTheBox",
+        "url": "posts/nunchucks.html"
+    },
+    {
         "id": "8",
         "titulo": "Love",
         "descripcion": "Writeup de la máquina Love de dificultad fácil de la plataforma HackTheBox.",
