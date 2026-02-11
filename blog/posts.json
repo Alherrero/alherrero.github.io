@@ -30,5 +30,21 @@
         "imagen": "imgArticulos/return.jpg",
         "categoria": "HackTheBox",
         "url": "posts/return.html"
+    },
+    {
+        "id": "4",
+        "titulo": "Care",
+        "descripcion": "Writeup del laboratorio Care de dificultad fácil de la plataforma VulNyx.",
+        "imagen": "imgArticulos/care.png",
+        "categoria": "VulNyx",
+        "url": "posts/care.html"
+    },
+    {
+        "id": "1",
+        "titulo": "MailForge",
+        "descripcion": "Writeup de la maquina MailForge de dificultad fácil de la plataforma VulNyx.",
+        "imagen": "imgArticulos/mailforge.png",
+        "categoria": "VulNyx",
+        "url": "posts/mailforge.html"
     }
 ]
