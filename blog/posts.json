@@ -1,5 +1,13 @@
 [
     {
+        "id": "10",
+        "titulo": "Curling",
+        "descripcion": "Writeup de la máquina Curling de dificultad fácil de la plataforma HackTheBox.",
+        "imagen": "imgArticulos/curling.jpg",
+        "categoria": "HackTheBox",
+        "url": "posts/curling.html"
+    },
+    {
         "id": "9",
         "titulo": "Nunchucks",
         "descripcion": "Writeup de la máquina Nunchucks de dificultad fácil de la plataforma HackTheBox.",
