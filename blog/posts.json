@@ -1,5 +1,13 @@
 [
     {
+        "id": "11",
+        "titulo": "Precious",
+        "descripcion": "Writeup de la máquina Precious de dificultad fácil de la plataforma HackTheBox.",
+        "imagen": "imgArticulos/precious.jpg",
+        "categoria": "HackTheBox",
+        "url": "posts/precious.html"
+    },
+    {
         "id": "10",
         "titulo": "Curling",
         "descripcion": "Writeup de la máquina Curling de dificultad fácil de la plataforma HackTheBox.",
