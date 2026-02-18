@@ -1,8 +1,16 @@
 [
     {
+        "id": "13",
+        "titulo": "Soccer",
+        "descripcion": "Writeup de la máquina Soccer de dificultad fácil de la plataforma HackTheBox.",
+        "imagen": "imgArticulos/soccer.jpg",
+        "categoria": "HackTheBox",
+        "url": "posts/soccer.html"
+    },
+    {
         "id": "12",
         "titulo": "Driver",
-        "descripcion": "Writeup de la máquina driver de dificultad fácil de la plataforma HackTheBox.",
+        "descripcion": "Writeup de la máquina Driver de dificultad fácil de la plataforma HackTheBox.",
         "imagen": "imgArticulos/driver.jpg",
         "categoria": "HackTheBox",
         "url": "posts/driver.html"

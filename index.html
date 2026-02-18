@@ -6,13 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Alherrero</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="navbar.css">
     <link rel="icon" href="logo.png" type="image/png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Orbitron:wght@700;800;900&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Orbitron:wght@700;800;900&display=swap" rel="stylesheet">
     <script>
         tailwind.config = {
             theme: {
@@ -35,173 +32,310 @@
         }
     </script>
     <style>
-        @keyframes float {
-
-            0%,
-            100% {
-                transform: translateY(0px);
-            }
-
-            50% {
-                transform: translateY(-20px);
-            }
+        :root {
+            --accent: #3b82f6;
+            --accent-light: #60a5fa;
+            --accent-dark: #2563eb;
+            --primary: #0a0612;
+            --secondary: #0a1520;
+            --card: #12202e;
         }
 
-        @keyframes pulse {
+        /* ── Scrollbar ── */
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: var(--primary); }
+        ::-webkit-scrollbar-thumb { background: var(--accent-dark); border-radius: 2px; }
 
-            0%,
-            100% {
-                opacity: 1;
-                transform: scale(1);
-            }
+        html { scroll-behavior: smooth; }
 
-            50% {
-                opacity: 0.6;
-                transform: scale(1.1);
-            }
-        }
-
-        @keyframes slideDown {
-            from {
-                transform: translateY(-100%);
-                opacity: 0;
-            }
-
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
+        /* ── Background grid ── */
         .circuit-pattern {
             background-image:
-                linear-gradient(90deg, rgba(59, 130, 246, 0.05) 1px, transparent 1px),
-                linear-gradient(rgba(59, 130, 246, 0.05) 1px, transparent 1px);
-            background-size: 50px 50px;
+                linear-gradient(90deg, rgba(59,130,246,0.04) 1px, transparent 1px),
+                linear-gradient(rgba(59,130,246,0.04) 1px, transparent 1px);
+            background-size: 60px 60px;
         }
 
-        .animate-slide-down {
-            animation: slideDown 0.6s ease-out;
+        /* ── Noise grain overlay ── */
+        .grain::after {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.6;
         }
 
-        .animate-fade-up {
-            animation: fadeInUp 0.8s ease-out both;
-        }
-
-        .animate-pulse-glow {
-            animation: pulse 2s ease-in-out infinite;
-        }
-
-        .animate-float {
-            animation: float 8s ease-in-out infinite;
-        }
-
+        /* ── Gradient text ── */
         .gradient-text {
-            background: linear-gradient(135deg, #3b82f6, #06b6d4, #60a5fa);
+            background: linear-gradient(135deg, #3b82f6 0%, #06b6d4 50%, #60a5fa 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
 
-        html {
-            scroll-behavior: smooth;
+        /* ── Glow line ── */
+        .glow-line {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--accent), var(--accent-light), transparent);
+        }
+
+        /* ── Animations ── */
+        @keyframes float {
+            0%,100% { transform: translateY(0px) rotate(0deg); }
+            33% { transform: translateY(-18px) rotate(1deg); }
+            66% { transform: translateY(-8px) rotate(-1deg); }
+        }
+        @keyframes pulse-dot {
+            0%,100% { opacity:1; box-shadow: 0 0 0 0 rgba(59,130,246,0.5); }
+            50% { opacity:0.8; box-shadow: 0 0 0 6px rgba(59,130,246,0); }
+        }
+        @keyframes slideDown {
+            from { transform:translateY(-100%); opacity:0; }
+            to   { transform:translateY(0);     opacity:1; }
+        }
+        @keyframes fadeUp {
+            from { opacity:0; transform:translateY(28px); }
+            to   { opacity:1; transform:translateY(0); }
+        }
+        @keyframes scanline {
+            0%   { transform: translateY(-100%); }
+            100% { transform: translateY(100vh); }
+        }
+        @keyframes blink {
+            0%,100% { opacity:1; }
+            50%      { opacity:0; }
+        }
+        @keyframes borderGlow {
+            0%,100% { box-shadow: 0 0 0px rgba(59,130,246,0); }
+            50%      { box-shadow: 0 0 20px rgba(59,130,246,0.25), inset 0 0 20px rgba(59,130,246,0.05); }
+        }
+
+        .animate-float  { animation: float 9s ease-in-out infinite; }
+        .animate-slide-down { animation: slideDown 0.5s cubic-bezier(0.16,1,0.3,1) both; }
+        .animate-fade-up    { animation: fadeUp 0.7s cubic-bezier(0.16,1,0.3,1) both; }
+        .dot-pulse { animation: pulse-dot 2.5s ease-in-out infinite; }
+        .cursor-blink { animation: blink 1.1s step-end infinite; }
+
+        /* ── Scanline effect on hero ── */
+        .scanline-container { position:relative; overflow:hidden; }
+        .scanline-container::before {
+            content:'';
+            position:absolute;
+            left:0; right:0;
+            height:2px;
+            background: linear-gradient(transparent, rgba(59,130,246,0.08), transparent);
+            animation: scanline 5s linear infinite;
+            pointer-events:none;
+            z-index:1;
+        }
+
+        /* ── Nav link hover ── */
+        .nav-link {
+            position: relative;
+            overflow: hidden;
+        }
+        .nav-link::after {
+            content:'';
+            position:absolute;
+            bottom:0; left:0; right:0;
+            height:1px;
+            background: var(--accent);
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.3s ease;
+        }
+        .nav-link:hover::after { transform: scaleX(1); transform-origin: left; }
+
+        /* ── Card hover glow ── */
+        .card-hover {
+            transition: all 0.4s cubic-bezier(0.16,1,0.3,1);
+        }
+        .card-hover:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 60px rgba(59,130,246,0.15), 0 0 0 1px rgba(59,130,246,0.3);
+        }
+        .card-main-hover:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 80px rgba(59,130,246,0.25), 0 0 0 1px rgba(96,165,250,0.5), inset 0 1px 0 rgba(96,165,250,0.1);
+        }
+        .card-main-hover { transition: all 0.4s cubic-bezier(0.16,1,0.3,1); }
+
+        /* ── Tech icon cards ── */
+        .tech-card {
+            position:relative;
+            overflow:hidden;
+            transition: all 0.35s cubic-bezier(0.16,1,0.3,1);
+        }
+        .tech-card::before {
+            content:'';
+            position:absolute;
+            inset:0;
+            background: radial-gradient(circle at 50% 0%, rgba(59,130,246,0.12), transparent 70%);
+            opacity:0;
+            transition: opacity 0.35s;
+        }
+        .tech-card:hover { transform: translateY(-5px) scale(1.02); }
+        .tech-card:hover::before { opacity:1; }
+
+        /* ── Bracket decoration ── */
+        .bracket-left::before  { content:'['; color: var(--accent); margin-right:0.3em; font-family:'JetBrains Mono'; opacity:0.5; }
+        .bracket-right::after  { content:']'; color: var(--accent); margin-left:0.3em;  font-family:'JetBrains Mono'; opacity:0.5; }
+
+        /* ── Section heading line ── */
+        .section-heading::before {
+            content:'';
+            display:inline-block;
+            width:2rem;
+            height:2px;
+            background: linear-gradient(90deg, var(--accent), var(--accent-light));
+            margin-right:0.75rem;
+            vertical-align:middle;
+            border-radius:1px;
+        }
+
+        /* ── About text highlight ── */
+        .highlight-word {
+            color: var(--accent-light);
+            font-style: italic;
+        }
+
+        /* ── Status bar ── */
+        .status-bar {
+            display:flex;
+            align-items:center;
+            gap:0.5rem;
+            padding: 0.3rem 0.8rem;
+            background: rgba(59,130,246,0.08);
+            border: 1px solid rgba(59,130,246,0.2);
+            border-radius: 9999px;
+            font-size:0.7rem;
+            font-family:'JetBrains Mono';
+            color: #60a5fa;
+            letter-spacing:0.05em;
+        }
+
+        /* ── Orb blobs ── */
+        .orb {
+            position:fixed;
+            border-radius:50%;
+            filter:blur(80px);
+            pointer-events:none;
+            z-index:-1;
         }
 
         @media (prefers-reduced-motion: reduce) {
-
-            *,
-            *::before,
-            *::after {
-                animation-duration: 0.01ms !important;
-                animation-iteration-count: 1 !important;
-                transition-duration: 0.01ms !important;
+            *, *::before, *::after {
+                animation-duration:0.01ms !important;
+                animation-iteration-count:1 !important;
+                transition-duration:0.01ms !important;
             }
         }
+
+        /* stagger helpers */
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.2s; }
+        .delay-3 { animation-delay: 0.3s; }
+        .delay-4 { animation-delay: 0.4s; }
+        .delay-5 { animation-delay: 0.5s; }
+        .delay-6 { animation-delay: 0.6s; }
     </style>
 </head>
 
-<body class="bg-primary text-gray-100 overflow-x-hidden">
+<body class="bg-primary text-gray-100 overflow-x-hidden grain">
 
-    <!-- Background Effects -->
-    <div class="fixed inset-0 circuit-pattern -z-10 opacity-40"></div>
-    <div
-        class="fixed w-[600px] h-[600px] -top-[300px] -right-[300px] bg-gradient-radial from-accent/15 to-transparent rounded-full blur-3xl -z-10 animate-float">
-    </div>
-    <div class="fixed w-[500px] h-[500px] -bottom-[250px] -left-[250px] bg-gradient-radial from-circuit/15 to-transparent rounded-full blur-3xl -z-10 animate-float"
-        style="animation-delay: 4s;"></div>
+    <!-- ── Background ── -->
+    <div class="fixed inset-0 circuit-pattern -z-10 opacity-60"></div>
+    <div class="orb w-[700px] h-[700px] -top-[350px] -right-[250px] animate-float" style="background:radial-gradient(circle, rgba(59,130,246,0.12) 0%, transparent 70%);"></div>
+    <div class="orb w-[500px] h-[500px] -bottom-[200px] -left-[200px] animate-float" style="background:radial-gradient(circle, rgba(29,78,216,0.10) 0%, transparent 70%); animation-delay:4.5s;"></div>
+    <div class="orb w-[300px] h-[300px] top-[40%] left-[40%] animate-float" style="background:radial-gradient(circle, rgba(6,182,212,0.05) 0%, transparent 70%); animation-delay:2s;"></div>
 
-    <!-- Navigation -->
-    <nav class="fixed top-0 w-full backdrop-blur-xl bg-primary/90 border-b border-accent/20 z-50 animate-slide-down">
+    <!-- ── Navigation ── -->
+    <nav class="fixed top-0 w-full backdrop-blur-2xl bg-primary/85 border-b border-accent/15 z-50 animate-slide-down">
         <div class="max-w-7xl mx-auto px-6 lg:px-12 py-4 flex items-center justify-between">
             <div class="flex items-center gap-3">
-                <img src="logo.png" alt="Logo Alejandro Herrero" class="w-10 h-10 rounded-lg">
-                <span class="font-display font-black text-lg tracking-[0.2em] gradient-text">ALHERRERO</span>
+                <div class="relative">
+                    <img src="logo.png" alt="Logo Alejandro Herrero" class="w-7 h-7">
+                </div>
+                <span class="font-display font-black text-base tracking-[0.25em] gradient-text">ALHERRERO</span>
             </div>
 
             <div class="hidden md:flex items-center gap-6">
-                <a href="blog"
-                    class="px-4 py-2 bg-accent/20 border border-accent/40 rounded-lg text-accent hover:bg-accent/30 transition-all duration-300 font-semibold text-sm">Mi
-                    Blog</a>
-                <a href="https://github.com/alherrero" target="_blank"
-                    class="text-gray-300 hover:text-accent transition-colors duration-300">
-                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                        <path
-                            d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                <div class="status-bar">
+                    <span class="w-1.5 h-1.5 bg-green-400 rounded-full dot-pulse"></span>
+                    <span>Ultima actualización: 18/02/2026</span>
+                </div>
+                <a href="blog" class="nav-link px-4 py-2 bg-accent/15 border border-accent/30 rounded-lg text-accent hover:bg-accent/25 transition-all duration-300 font-semibold text-xs tracking-wider">
+                    MI BLOG
+                </a>
+                <a href="https://github.com/alherrero" target="_blank" aria-label="GitHub"
+                    class="p-2 rounded-lg border border-accent/20 text-gray-400 hover:text-accent hover:border-accent/40 hover:bg-accent/10 transition-all duration-300">
+                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
                     </svg>
                 </a>
             </div>
         </div>
+        <div class="glow-line opacity-60"></div>
     </nav>
 
-    <!-- Main Content -->
-    <main class="max-w-7xl mx-auto px-6 lg:px-12 pt-28 pb-20">
+    <!-- ── Main ── -->
+    <main class="max-w-7xl mx-auto px-6 lg:px-12 pt-32 pb-24">
 
-        <!-- Hero Section -->
-        <section id="inicio" class="mb-8 animate-fade-up" style="animation-delay: 0.2s;">
-            <!--
-            <div class="mb-4">
-                <span class="inline-block px-4 py-1 bg-accent/10 border border-accent/30 rounded-full text-accent text-xs font-bold tracking-wider mb-6">
-                    TEXTO
-                </span>
-            </div>
-            -->
-            <h1 class="font-display text-5xl lg:text-6xl font-black leading-tight mb-4 gradient-text">
-                Alejandro Herrero Raboso
-            </h1>
-            <div class="flex items-center gap-3 mb-6">
-                <span class="w-2 h-2 bg-accent rounded-full animate-pulse-glow"></span>
-                <span class="text-xl text-gray-300 font-semibold">Pentester</span>
+        <!-- ── Hero ── -->
+        <section id="inicio" class="mb-20 scanline-container rounded-2xl">
+            <div class="relative p-8 lg:p-12">
+
+                <!-- decorative corner brackets -->
+                <div class="absolute top-4 left-4 w-6 h-6 border-t-2 border-l-2 border-accent/40 rounded-tl-md"></div>
+                <div class="absolute top-4 right-4 w-6 h-6 border-t-2 border-r-2 border-accent/40 rounded-tr-md"></div>
+                <div class="absolute bottom-4 left-4 w-6 h-6 border-b-2 border-l-2 border-accent/40 rounded-bl-md"></div>
+                <div class="absolute bottom-4 right-4 w-6 h-6 border-b-2 border-r-2 border-accent/40 rounded-br-md"></div>
+
+                <!-- version tag -->
+                <div class="animate-fade-up delay-1 mb-6">
+                    <span class="inline-flex items-center gap-2 px-3 py-1 bg-accent/10 border border-accent/25 rounded-full text-accent text-xs font-mono tracking-widest">
+                        <span class="w-1 h-1 bg-accent rounded-full"></span>
+                        17 años
+                    </span>
+                </div>
+
+                <h1 class="font-display text-4xl sm:text-5xl lg:text-7xl font-black leading-none mb-6 animate-fade-up delay-2">
+                    <span class="gradient-text block">Alejandro Herrero Raboso</span>
+                </h1>
+
+                <div class="flex flex-wrap items-center gap-4 animate-fade-up delay-3">
+                    <div class="flex items-center gap-2.5">
+                        <span class="w-2 h-2 bg-accent rounded-full dot-pulse"></span>
+                        <span class="text-lg text-gray-200 font-semibold tracking-wide">Pentester</span>
+                        <span class="cursor-blink text-accent font-bold text-lg">_</span>
+                    </div>
+                    <span class="hidden sm:block text-accent/30 text-lg">|</span>
+                    <span class="text-xs text-gray-500 font-mono tracking-widest">Pwned! 🕵️‍♂️</span>
+                </div>
             </div>
         </section>
 
-        <!-- About Section -->
-        <section id="sobre-mi" class="mb-8">
-            <h2 class="text-2xl font-display font-bold mb-8 text-gray-200 flex items-center gap-3 animate-fade-up">
-                <span class="w-8 h-0.5 bg-accent"></span>
+        <!-- ── About ── -->
+        <section id="sobre-mi" class="mb-16">
+            <h2 class="text-xl font-display font-bold mb-8 text-gray-200 flex items-center animate-fade-up delay-1 section-heading">
                 Sobre mí
             </h2>
-            <div class="grid lg:grid-cols-1 gap-12 animate-fade-up" style="animation-delay: 0.1s;">
-                <div class="space-y-5 text-gray-300 leading-relaxed text-justify text-base">
+
+            <div class="relative p-8 bg-gradient-to-br from-card/70 to-secondary/50 backdrop-blur-sm border border-accent/15 rounded-2xl animate-fade-up delay-2">
+                <!-- subtle inner glow top edge -->
+                <div class="absolute top-0 left-1/2 -translate-x-1/2 w-1/2 h-px bg-gradient-to-r from-transparent via-accent/40 to-transparent"></div>
+
+                <div class="space-y-5 text-gray-300 leading-relaxed text-justify text-sm lg:text-base">
                     <p>
                         Soy Alejandro, un entusiasta de la ciberseguridad al que le gusta aprender algo nuevo cada día.
-                        Me centro principalmente en el pentesting web y cuento con experiencia reportando varias
+                        Me centro principalmente en el <span class="highlight-word">pentesting web</span> y cuento con experiencia reportando varias
                         vulnerabilidades a empresas.
                     </p>
                     <p>
-                        Trabajo con Windows y Linux, y creo mis propios laboratorios en máquinas virtuales. Desarrollo
-                        herramientas en Python y Bash, y realizo proyectos personales de forma constante para reforzar
+                        Trabajo con <span class="highlight-word">Windows y Linux</span>, y creo mis propios laboratorios en máquinas virtuales. Desarrollo
+                        herramientas en <span class="highlight-word">Python y Bash</span>, y realizo proyectos personales de forma constante para reforzar
                         mis habilidades.
                     </p>
                     <p>
@@ -210,59 +344,61 @@
                     </p>
                 </div>
             </div>
-
         </section>
 
-        <!-- Blog & Projects Section -->
+        <!-- ── Blog & Machines ── -->
         <section class="mb-16">
-            <!--
-            <h2 class="text-2xl font-display font-bold mb-8 text-gray-200 flex items-center gap-3 animate-fade-up">
-                <span class="w-8 h-0.5 bg-accent"></span>
-                Contenido & Proyectos
-            </h2>
-            -->
-            <div class="grid lg:grid-cols-2 gap-8">
+            <div class="grid lg:grid-cols-2 gap-6">
 
-                <!-- Blog Card -->
+                <!-- Blog Card — primary -->
                 <a href="blog"
-                    class="group relative p-8 bg-gradient-to-br from-card/80 to-secondary/80 backdrop-blur-sm border-2 border-accent/30 rounded-2xl overflow-hidden transition-all duration-500 hover:-translate-y-2 hover:border-accent hover:shadow-xl hover:shadow-accent/20 animate-fade-up"
-                    style="animation-delay: 0.2s;">
+                    class="group relative p-8 bg-gradient-to-br from-accent/10 via-card/80 to-secondary/80 backdrop-blur-sm border border-accent/30 rounded-2xl overflow-hidden card-main-hover animate-fade-up delay-2">
 
-                    <div class="absolute top-0 right-0 w-32 h-32 opacity-10">
-                        <svg viewBox="0 0 200 200" class="w-full h-full">
-                            <line x1="20" y1="20" x2="180" y2="20" stroke="#3b82f6" stroke-width="2"
-                                stroke-dasharray="5,5">
-                                <animate attributeName="stroke-dashoffset" from="10" to="0" dur="2s"
-                                    repeatCount="indefinite" />
-                            </line>
-                            <circle cx="50" cy="20" r="3" fill="#3b82f6" />
-                            <circle cx="120" cy="20" r="3" fill="#3b82f6" />
-                        </svg>
-                    </div>
+                    <!-- glowing top border -->
+                    <div class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-accent to-transparent opacity-60 group-hover:opacity-100 transition-opacity duration-500"></div>
+
+                    <!-- bg decorative circle -->
+                    <div class="absolute -right-8 -bottom-8 w-40 h-40 rounded-full bg-accent/5 blur-2xl group-hover:bg-accent/10 transition-all duration-500"></div>
 
                     <div class="relative z-10">
-                        <h3 class="font-display text-3xl font-black mb-3 gradient-text">Mi Blog</h3>
-            
-                        <div
-                            class="inline-flex items-center gap-2 text-accent font-semibold text-sm transition-all duration-300 group-hover:gap-3">
-                            <span>Explorar Artículos</span>
-                            <span>→</span>
+                        <div class="flex items-start justify-between mb-4">
+                            <div class="p-3 bg-accent/15 border border-accent/25 rounded-xl">
+                                <svg class="w-5 h-5 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                                </svg>
+                            </div>
+                            <span class="text-xs font-mono text-accent/60 tracking-widest">01</span>
+                        </div>
+                        <h3 class="font-display text-2xl lg:text-3xl font-black mb-2 gradient-text">Mi Blog</h3>
+                        <p class="text-gray-400 text-sm mb-6 font-mono">Writeups · Investigación · Tips</p>
+                        <div class="inline-flex items-center gap-2 text-accent font-semibold text-sm group-hover:gap-3 transition-all duration-300">
+                            <span>Explorar artículos</span>
+                            <span class="transition-transform duration-300 group-hover:translate-x-1">→</span>
                         </div>
                     </div>
                 </a>
 
-                <!-- Projects Card -->
-                <a href="proyectos"
-                    class="group relative p-8 bg-gradient-to-br from-card/60 to-secondary/60 backdrop-blur-sm border border-accent/20 rounded-2xl overflow-hidden transition-all duration-500 hover:-translate-y-2 hover:border-accent/60 hover:shadow-xl hover:shadow-accent/10 animate-fade-up"
-                    style="animation-delay: 0.4s;">
+                <!-- Machines Card — secondary -->
+                <a href="maquinas"
+                    class="group relative p-8 bg-gradient-to-br from-card/60 to-secondary/60 backdrop-blur-sm border border-accent/15 rounded-2xl overflow-hidden card-hover animate-fade-up delay-3">
+
+                    <div class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-accent/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    <div class="absolute -right-8 -bottom-8 w-40 h-40 rounded-full bg-circuit/5 blur-2xl group-hover:bg-circuit/10 transition-all duration-500"></div>
 
                     <div class="relative z-10">
-                        <h3 class="font-display text-3xl font-black mb-3 text-gray-100">Proyectos</h3>
-
-                        <div
-                            class="inline-flex items-center gap-2 text-accent font-semibold text-sm transition-all duration-300 group-hover:gap-3">
-                            <span>Ver Proyectos</span>
-                            <span>→</span>
+                        <div class="flex items-start justify-between mb-4">
+                            <div class="p-3 bg-circuit/15 border border-circuit/25 rounded-xl group-hover:bg-accent/15 group-hover:border-accent/25 transition-all duration-300">
+                                <svg class="w-5 h-5 text-accentLight" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 3H5a2 2 0 00-2 2v4m6-6h10a2 2 0 012 2v4M9 3v18m0 0h10a2 2 0 002-2V9M9 21H5a2 2 0 01-2-2V9m0 0h18"/>
+                                </svg>
+                            </div>
+                            <span class="text-xs font-mono text-gray-600 tracking-widest">02</span>
+                        </div>
+                        <h3 class="font-display text-2xl lg:text-3xl font-black mb-2 text-gray-100 group-hover:text-white transition-colors duration-300">Máquinas Vulnerables</h3>
+                        <p class="text-gray-500 text-sm mb-6 font-mono">Labs · CTF · Practice</p>
+                        <div class="inline-flex items-center gap-2 text-accentLight font-semibold text-sm group-hover:gap-3 transition-all duration-300">
+                            <span>Descubre mis máquinas</span>
+                            <span class="transition-transform duration-300 group-hover:translate-x-1">→</span>
                         </div>
                     </div>
                 </a>
@@ -270,75 +406,90 @@
             </div>
         </section>
 
-        <!-- Technologies Section -->
+        <!-- ── Technologies ── -->
         <section id="tecnologias" class="mb-24">
-            <h2 class="text-2xl font-display font-bold mb-8 text-gray-200 flex items-center gap-3 animate-fade-up">
-                <span class="w-8 h-0.5 bg-accent"></span>
-                Tecnologías & Herramientas
+            <h2 class="text-xl font-display font-bold mb-8 text-gray-200 flex items-center animate-fade-up delay-1 section-heading">
+                Tecnologías &amp; Herramientas
             </h2>
-            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 animate-fade-up" style="animation-delay: 0.1s;">
 
-                <div
-                    class="group p-6 bg-gradient-to-br from-accent/10 to-circuit/10 border border-accent/20 rounded-2xl transition-all duration-300 hover:-translate-y-2 hover:border-accent hover:shadow-lg hover:shadow-accent/20">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-5">
+
+                <div class="tech-card p-6 bg-gradient-to-br from-card/80 to-secondary/80 border border-accent/15 rounded-2xl animate-fade-up delay-2 cursor-default">
                     <div class="flex flex-col items-center text-center gap-4">
-                        <div class="w-16 h-16 flex items-center justify-center">
-                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg"
-                                alt="Linux" class="w-14 h-14">
+                        <div class="relative">
+                            <div class="absolute inset-0 rounded-full bg-accent/10 blur-xl"></div>
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg" alt="Linux" class="relative w-12 h-12">
                         </div>
-                        <span class="font-bold text-lg text-gray-200">Linux</span>
+                        <div>
+                            <span class="font-bold text-sm text-gray-200 block">Linux</span>
+                            <span class="text-xs text-gray-500 font-mono">Kali · Debian</span>
+                        </div>
                     </div>
                 </div>
 
-                <div
-                    class="group p-6 bg-gradient-to-br from-accent/10 to-circuit/10 border border-accent/20 rounded-2xl transition-all duration-300 hover:-translate-y-2 hover:border-accent hover:shadow-lg hover:shadow-accent/20">
+                <div class="tech-card p-6 bg-gradient-to-br from-card/80 to-secondary/80 border border-accent/15 rounded-2xl animate-fade-up delay-3 cursor-default">
                     <div class="flex flex-col items-center text-center gap-4">
-                        <div class="w-16 h-16 flex items-center justify-center">
-                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg"
-                                alt="Python" class="w-14 h-14">
+                        <div class="relative">
+                            <div class="absolute inset-0 rounded-full bg-accent/10 blur-xl"></div>
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python" class="relative w-12 h-12">
                         </div>
-                        <span class="font-bold text-lg text-gray-200">Python</span>
+                        <div>
+                            <span class="font-bold text-sm text-gray-200 block">Python</span>
+                            <span class="text-xs text-gray-500 font-mono">Scripts · Tools</span>
+                        </div>
                     </div>
                 </div>
 
-                <div
-                    class="group p-6 bg-gradient-to-br from-accent/10 to-circuit/10 border border-accent/20 rounded-2xl transition-all duration-300 hover:-translate-y-2 hover:border-accent hover:shadow-lg hover:shadow-accent/20">
+                <div class="tech-card p-6 bg-gradient-to-br from-card/80 to-secondary/80 border border-accent/15 rounded-2xl animate-fade-up delay-4 cursor-default">
                     <div class="flex flex-col items-center text-center gap-4">
-                        <div class="w-16 h-16 flex items-center justify-center">
-                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bash/bash-original.svg"
-                                alt="Bash" class="w-14 h-14">
+                        <div class="relative">
+                            <div class="absolute inset-0 rounded-full bg-accent/10 blur-xl"></div>
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bash/bash-original.svg" alt="Bash" class="relative w-12 h-12">
                         </div>
-                        <span class="font-bold text-lg text-gray-200">Bash</span>
+                        <div>
+                            <span class="font-bold text-sm text-gray-200 block">Bash</span>
+                            <span class="text-xs text-gray-500 font-mono">Automation</span>
+                        </div>
                     </div>
                 </div>
 
-                <div
-                    class="group p-6 bg-gradient-to-br from-accent/10 to-circuit/10 border border-accent/20 rounded-2xl transition-all duration-300 hover:-translate-y-2 hover:border-accent hover:shadow-lg hover:shadow-accent/20">
+                <div class="tech-card p-6 bg-gradient-to-br from-card/80 to-secondary/80 border border-accent/15 rounded-2xl animate-fade-up delay-5 cursor-default">
                     <div class="flex flex-col items-center text-center gap-4">
-                        <div class="w-16 h-16 flex items-center justify-center">
-                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git"
-                                class="w-14 h-14">
+                        <div class="relative">
+                            <div class="absolute inset-0 rounded-full bg-accent/10 blur-xl"></div>
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git" class="relative w-12 h-12">
                         </div>
-                        <span class="font-bold text-lg text-gray-200">Git</span>
+                        <div>
+                            <span class="font-bold text-sm text-gray-200 block">Git</span>
+                            <span class="text-xs text-gray-500 font-mono">Version control</span>
+                        </div>
                     </div>
                 </div>
-                
+
             </div>
         </section>
+
     </main>
 
-    <!-- Footer -->
-    <footer class="border-t border-accent/20 py-8">
-        <div class="max-w-7xl mx-auto px-6 lg:px-12">
-            <div class="flex justify-center items-center">
-                <p class="text-gray-500 text-sm font-mono text-center">
-                    © 2026 Alejandro Herrero Raboso
-                </p>
+    <!-- ── Footer ── -->
+    <footer class="relative border-t border-accent/15 py-10">
+        <div class="glow-line absolute top-0 left-0 right-0 opacity-50"></div>
+        <div class="max-w-7xl mx-auto px-6 lg:px-12 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-2">
+                <img src="logo.png" alt="Logo" class="w-6 h-6 rounded opacity-60">
+                <span class="font-display text-xs tracking-widest text-gray-600">ALHERRERO</span>
+            </div>
+            <p class="text-gray-600 text-xs font-mono tracking-wider">
+                © 2026 Alejandro Herrero Raboso
+            </p>
+            <div class="flex items-center gap-1 text-xs text-gray-700 font-mono">
+                <span class="w-1.5 h-1.5 bg-accent/40 rounded-full"></span>
+                <span>Talavera de la Reina, ES</span>
             </div>
         </div>
     </footer>
 
-    <script data-goatcounter="https://alherrero.goatcounter.com/count"
-        async src="//gc.zgo.at/count.js"></script>
-</body>
+    <script data-goatcounter="https://alherrero.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 
+</body>
 </html>
