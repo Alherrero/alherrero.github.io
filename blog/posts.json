@@ -1,5 +1,13 @@
 [
     {
+        "id": "14",
+        "titulo": "Data",
+        "descripcion": "Writeup de la máquina Data de dificultad fácil de la plataforma HackTheBox.",
+        "imagen": "imgArticulos/data.jpg",
+        "categoria": "HackTheBox",
+        "url": "posts/data.html"
+    },
+    {
         "id": "13",
         "titulo": "Soccer",
         "descripcion": "Writeup de la máquina Soccer de dificultad fácil de la plataforma HackTheBox.",

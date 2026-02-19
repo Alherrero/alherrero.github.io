@@ -137,6 +137,29 @@
             box-shadow: 0 20px 50px rgba(59,130,246,0.15), 0 0 0 1px rgba(59,130,246,0.2);
         }
 
+        /* ── Pinned card ── */
+        .pinned-card {
+            border-color: rgba(59,130,246,0.35) !important;
+            box-shadow: 0 0 0 1px rgba(59,130,246,0.15), 0 0 30px rgba(59,130,246,0.08);
+        }
+        .pinned-card:hover {
+            border-color: rgba(59,130,246,0.65) !important;
+            box-shadow: 0 20px 50px rgba(59,130,246,0.2), 0 0 0 1px rgba(59,130,246,0.35) !important;
+        }
+
+        /* ── Pin badge ── */
+        .pin-badge {
+            background: linear-gradient(135deg, rgba(59,130,246,0.9), rgba(37,99,235,0.9));
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(96,165,250,0.5);
+        }
+
+        /* ── Pinned section divider ── */
+        .pinned-divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(59,130,246,0.3), rgba(96,165,250,0.3), transparent);
+        }
+
         /* ── Post card image overlay ── */
         .post-img-overlay {
             position:absolute; inset:0;
@@ -261,7 +284,7 @@
             <div class="animate-fade-up delay-1 mb-5">
                 <span class="inline-flex items-center gap-2 px-3 py-1 bg-accent/10 border border-accent/25 rounded-full text-accent text-xs font-mono tracking-widest">
                     <span class="w-1 h-1 bg-accent rounded-full"></span>
-                    Ultimo post añadido: 18/02/2026
+                    Ultimo post añadido: 19/02/2026
                 </span>
             </div>
 
@@ -323,7 +346,24 @@
             Resultados: <span id="resultsCount" class="text-accent">0</span> artículos encontrados
         </div>
 
-        <!-- Grid -->
+        <!-- Pinned section -->
+        <div id="pinnedSection" class="hidden mb-10">
+            <div class="flex items-center gap-3 mb-5">
+                <i class="fas fa-thumbtack text-accent text-xs rotate-45"></i>
+                <span class="text-[10px] font-bold uppercase tracking-[0.2em] text-accent">Fijados</span>
+                <div class="flex-1 pinned-divider"></div>
+            </div>
+            <div id="pinnedGrid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+
+            <!-- Divider between pinned and regular -->
+            <div class="mt-10 mb-8 flex items-center gap-3">
+                <div class="flex-1 pinned-divider"></div>
+                <span class="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-600">Todos los artículos</span>
+                <div class="flex-1 pinned-divider"></div>
+            </div>
+        </div>
+
+        <!-- Regular posts grid -->
         <div id="postsGrid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             <div class="cyber-card h-96 rounded-2xl skeleton"></div>
             <div class="cyber-card h-96 rounded-2xl skeleton"></div>
@@ -374,9 +414,9 @@
     </footer>
 
     <script>
-        let allPosts     = [];
+        let allPosts      = [];
         let filteredPosts = [];
-        let currentPage  = 1;
+        let currentPage   = 1;
         const postsPerPage = 9;
         let activeCategory = null;
         let currentSort    = 'recent';
@@ -456,28 +496,65 @@
 
         /* ── Render ── */
         function updateView() {
-            const totalPages   = Math.ceil(filteredPosts.length / postsPerPage);
+            // Separate pinned from regular
+            const pinnedPosts  = filteredPosts.filter(p => p.pin === true);
+            const regularPosts = filteredPosts.filter(p => !p.pin);
+
+            const totalPages   = Math.ceil(regularPosts.length / postsPerPage);
             const start        = (currentPage - 1) * postsPerPage;
-            const paginated    = filteredPosts.slice(start, start + postsPerPage);
-            renderPosts(paginated);
+            const paginated    = regularPosts.slice(start, start + postsPerPage);
+
+            renderPinnedPosts(pinnedPosts);
+            renderPosts(paginated, regularPosts.length === 0 && pinnedPosts.length === 0);
             renderPagination(totalPages);
             updateResultsInfo();
         }
 
-        function renderPosts(posts) {
+        /* ── Render pinned ── */
+        function renderPinnedPosts(posts) {
+            const section = document.getElementById('pinnedSection');
+            const grid    = document.getElementById('pinnedGrid');
+
+            if (posts.length === 0) {
+                section.classList.add('hidden');
+                return;
+            }
+            section.classList.remove('hidden');
+            grid.innerHTML = posts.map((post, i) => buildCard(post, i, true)).join('');
+        }
+
+        /* ── Render regular ── */
+        function renderPosts(posts, showNoResults) {
             const grid      = document.getElementById('postsGrid');
             const noResults = document.getElementById('noResults');
 
-            if (posts.length === 0) {
+            if (showNoResults) {
                 grid.classList.add('hidden');
                 noResults.classList.remove('hidden');
                 return;
             }
-            grid.classList.remove('hidden');
             noResults.classList.add('hidden');
 
-            grid.innerHTML = posts.map((post, i) => `
-                <article class="cyber-card rounded-2xl overflow-hidden flex flex-col h-full"
+            if (posts.length === 0) {
+                grid.classList.add('hidden');
+            } else {
+                grid.classList.remove('hidden');
+                grid.innerHTML = posts.map((post, i) => buildCard(post, i, false)).join('');
+            }
+        }
+
+        /* ── Build card HTML ── */
+        function buildCard(post, i, isPinned) {
+            const pinnedClass  = isPinned ? 'pinned-card' : '';
+            const pinBadge     = isPinned
+                ? `<div class="absolute top-3 left-3 pin-badge flex items-center gap-1.5 px-2.5 py-1 rounded-md">
+                       <i class="fas fa-thumbtack text-white text-[9px] rotate-45"></i>
+                       <span class="text-[9px] font-bold uppercase tracking-widest text-white">Fijado</span>
+                   </div>`
+                : `<div class="absolute top-3 left-3 w-4 h-4 border-t border-l border-accent/50 rounded-tl"></div>`;
+
+            return `
+                <article class="cyber-card ${pinnedClass} rounded-2xl overflow-hidden flex flex-col h-full"
                          style="animation: fadeUp 0.5s cubic-bezier(0.16,1,0.3,1) ${i * 0.07}s both">
                     <!-- Image -->
                     <div class="relative aspect-video overflow-hidden bg-secondary flex-shrink-0">
@@ -485,8 +562,7 @@
                              onerror="this.src='https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=800'"
                              class="w-full h-full object-cover transition-transform duration-700 hover:scale-105">
                         <div class="post-img-overlay"></div>
-                        <!-- Corner bracket -->
-                        <div class="absolute top-3 left-3 w-4 h-4 border-t border-l border-accent/50 rounded-tl"></div>
+                        ${pinBadge}
                         <!-- Category badge -->
                         <div class="absolute top-3 right-3">
                             <span class="px-2.5 py-1 bg-primary/80 backdrop-blur-sm border border-accent/30 rounded-md text-[9px] font-bold uppercase tracking-widest text-accent">
@@ -497,23 +573,20 @@
 
                     <!-- Body -->
                     <div class="p-6 flex flex-col flex-grow">
-                        <!-- inner top glow -->
                         <div class="absolute top-0 left-1/2 -translate-x-1/2 w-1/2 h-px bg-gradient-to-r from-transparent via-accent/20 to-transparent pointer-events-none"></div>
-
                         <h2 class="font-display text-sm font-bold text-white mb-3 leading-snug tracking-wide">
                             ${post.titulo}
                         </h2>
                         <p class="text-gray-400 text-xs mb-6 flex-grow line-clamp-3 font-sans leading-relaxed">
                             ${post.descripcion}
                         </p>
-
                         <a href="${post.url}"
                            class="read-btn w-full py-3 bg-accent/8 border border-accent/20 rounded-xl text-center text-[10px] font-bold uppercase tracking-widest text-gray-300">
                             Leer &nbsp;→
                         </a>
                     </div>
                 </article>
-            `).join('');
+            `;
         }
 
         function renderPagination(totalPages) {
@@ -592,7 +665,7 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         });
 
-        /* ── Keydown animation definition for dynamic cards ── */
+        /* ── fadeUp keyframe for dynamic cards ── */
         const style = document.createElement('style');
         style.textContent = `@keyframes fadeUp { from { opacity:0; transform:translateY(24px); } to { opacity:1; transform:translateY(0); } }`;
         document.head.appendChild(style);
