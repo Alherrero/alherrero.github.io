@@ -1,5 +1,13 @@
 [
     {
+        "id": "15",
+        "titulo": "Blue",
+        "descripcion": "Writeup de la máquina Blue de dificultad fácil de la plataforma HackTheBox.",
+        "imagen": "imgArticulos/blue.jpg",
+        "categoria": "HackTheBox",
+        "url": "posts/blue.html"
+    },
+    {
         "id": "14",
         "titulo": "Data",
         "descripcion": "Writeup de la máquina Data de dificultad fácil de la plataforma HackTheBox.",
