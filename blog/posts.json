@@ -1,5 +1,13 @@
 [
     {
+        "id": "16",
+        "titulo": "University",
+        "descripcion": "Writeup de la máquina University de dificultad media de la plataforma VulNyx.",
+        "imagen": "imgArticulos/university.jpg",
+        "categoria": "VulNyx",
+        "url": "posts/university.html"
+    },
+    {
         "id": "15",
         "titulo": "Blue",
         "descripcion": "Writeup de la máquina Blue de dificultad fácil de la plataforma HackTheBox.",
@@ -83,7 +91,7 @@
         "id": "4",
         "titulo": "Care",
         "descripcion": "Writeup del laboratorio Care de dificultad fácil de la plataforma VulNyx.",
-        "imagen": "imgArticulos/care.png",
+        "imagen": "imgArticulos/care.jpg",
         "categoria": "VulNyx",
         "url": "posts/care.html"
     },
@@ -91,7 +99,7 @@
         "id": "1",
         "titulo": "MailForge",
         "descripcion": "Writeup de la maquina MailForge de dificultad fácil de la plataforma VulNyx.",
-        "imagen": "imgArticulos/mailforge.png",
+        "imagen": "imgArticulos/mailforge.jpg",
         "categoria": "VulNyx",
         "url": "posts/mailforge.html"
     }
