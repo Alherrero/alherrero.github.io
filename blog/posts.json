@@ -4,7 +4,7 @@
         "titulo": "University",
         "descripcion": "Writeup de la máquina University de dificultad media de la plataforma VulNyx.",
         "imagen": "imgArticulos/university.jpg",
-        "categoria": "VulNyx",
+        "categoria": "Writeups (Vulnyx)",
         "url": "posts/university.html"
     },
     {
@@ -12,7 +12,7 @@
         "titulo": "Blue",
         "descripcion": "Writeup de la máquina Blue de dificultad fácil de la plataforma HackTheBox.",
         "imagen": "imgArticulos/blue.jpg",
-        "categoria": "HackTheBox",
+        "categoria": "Writeups (HackTheBox)",
         "url": "posts/blue.html"
     },
     {
@@ -20,7 +20,7 @@
         "titulo": "Data",
         "descripcion": "Writeup de la máquina Data de dificultad fácil de la plataforma HackTheBox.",
         "imagen": "imgArticulos/data.jpg",
-        "categoria": "HackTheBox",
+        "categoria": "Writeups (HackTheBox)",
         "url": "posts/data.html"
     },
     {
@@ -28,7 +28,7 @@
         "titulo": "Soccer",
         "descripcion": "Writeup de la máquina Soccer de dificultad fácil de la plataforma HackTheBox.",
         "imagen": "imgArticulos/soccer.jpg",
-        "categoria": "HackTheBox",
+        "categoria": "Writeups (HackTheBox)",
         "url": "posts/soccer.html"
     },
     {
@@ -36,7 +36,7 @@
         "titulo": "Driver",
         "descripcion": "Writeup de la máquina Driver de dificultad fácil de la plataforma HackTheBox.",
         "imagen": "imgArticulos/driver.jpg",
-        "categoria": "HackTheBox",
+        "categoria": "Writeups (HackTheBox)",
         "url": "posts/driver.html"
     },
     {
@@ -44,7 +44,7 @@
         "titulo": "Precious",
         "descripcion": "Writeup de la máquina Precious de dificultad fácil de la plataforma HackTheBox.",
         "imagen": "imgArticulos/precious.jpg",
-        "categoria": "HackTheBox",
+        "categoria": "Writeups (HackTheBox)",
         "url": "posts/precious.html"
     },
     {
@@ -52,7 +52,7 @@
         "titulo": "Curling",
         "descripcion": "Writeup de la máquina Curling de dificultad fácil de la plataforma HackTheBox.",
         "imagen": "imgArticulos/curling.jpg",
-        "categoria": "HackTheBox",
+        "categoria": "Writeups (HackTheBox)",
         "url": "posts/curling.html"
     },
     {
@@ -60,7 +60,7 @@
         "titulo": "Nunchucks",
         "descripcion": "Writeup de la máquina Nunchucks de dificultad fácil de la plataforma HackTheBox.",
         "imagen": "imgArticulos/nunchucks.jpg",
-        "categoria": "HackTheBox",
+        "categoria": "Writeups (HackTheBox)",
         "url": "posts/nunchucks.html"
     },
     {
@@ -68,7 +68,7 @@
         "titulo": "Love",
         "descripcion": "Writeup de la máquina Love de dificultad fácil de la plataforma HackTheBox.",
         "imagen": "imgArticulos/love.jpg",
-        "categoria": "HackTheBox",
+        "categoria": "Writeups (HackTheBox)",
         "url": "posts/love.html"
     },
     {
@@ -76,7 +76,7 @@
         "titulo": "Horizontall",
         "descripcion": "Writeup de la máquina Horizontall de dificultad fácil de la plataforma HackTheBox.",
         "imagen": "imgArticulos/horizontall.jpg",
-        "categoria": "HackTheBox",
+        "categoria": "Writeups (HackTheBox)",
         "url": "posts/horizontall.html"
     },
     {
@@ -84,7 +84,7 @@
         "titulo": "Return",
         "descripcion": "Writeup de la máquina Return de dificultad fácil de la plataforma HackTheBox.",
         "imagen": "imgArticulos/return.jpg",
-        "categoria": "HackTheBox",
+        "categoria": "Writeups (HackTheBox)",
         "url": "posts/return.html"
     },
     {
@@ -92,7 +92,7 @@
         "titulo": "Care",
         "descripcion": "Writeup del laboratorio Care de dificultad fácil de la plataforma VulNyx.",
         "imagen": "imgArticulos/care.jpg",
-        "categoria": "VulNyx",
+        "categoria": "Writeups (Vulnyx)",
         "url": "posts/care.html"
     },
     {
@@ -100,7 +100,7 @@
         "titulo": "MailForge",
         "descripcion": "Writeup de la maquina MailForge de dificultad fácil de la plataforma VulNyx.",
         "imagen": "imgArticulos/mailforge.jpg",
-        "categoria": "VulNyx",
+        "categoria": "Writeups (Vulnyx)",
         "url": "posts/mailforge.html"
     }
 ]

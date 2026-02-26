@@ -1,16 +1,35 @@
 [
   {
+    "id": 3,
+    "nombre": "Automation",
+    "descripcion": "",
+    "imagen": "img/automation.png",
+    "difficulty": "easy",
+    "vulnyx": "https://vulnyx.com/#automation",
+    "writeup": "",
+    "fecha": "25/02/2026",
+    "os": "Linux"
+  },
+  {
     "id": 2,
     "nombre": "University",
-    "descripcion": "Linux & Medium",
+    "descripcion": "",
     "imagen": "img/university.png",
-    "github": "https://vulnyx.com/#university"
+    "difficulty": "Medium",
+    "vulnyx": "https://vulnyx.com/#university",
+    "writeup": "https://alherrero.github.io/blog/posts/university.html",
+    "fecha": "15/02/2026",
+    "os": "Linux"
   },
   {
     "id": 1,
     "nombre": "Northwing",
-    "descripcion": "Linux & Easy",
+    "descripcion": "",
     "imagen": "img/northwing.png",
-    "github": "https://vulnyx.com/#northwing"
+    "difficulty": "easy",
+    "vulnyx": "https://vulnyx.com/#northwing",
+    "writeup": "",
+    "fecha": "11/02/2026",
+    "os": "Linux"
   }
 ]

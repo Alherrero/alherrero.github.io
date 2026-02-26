@@ -23,6 +23,9 @@
                         accentLight: '#60a5fa',
                         accentDark:  '#2563eb',
                         circuit:     '#1d4ed8',
+                        success:     '#10b981',
+                        warning:     '#f59e0b',
+                        danger:      '#ef4444',
                     },
                     fontFamily: {
                         sans:    ['JetBrains Mono', 'monospace'],
@@ -41,6 +44,9 @@
             --primary:      #0a0612;
             --secondary:    #0a1520;
             --card:         #12202e;
+            --success:      #10b981;
+            --warning:      #f59e0b;
+            --danger:       #ef4444;
         }
 
         /* ── Scrollbar ── */
@@ -104,12 +110,17 @@
             0%   { transform:translateY(-100%); }
             100% { transform:translateY(200%); }
         }
+        @keyframes glow-pulse {
+            0%, 100% { box-shadow: 0 0 20px rgba(59,130,246,0.3), 0 0 40px rgba(59,130,246,0.1); }
+            50% { box-shadow: 0 0 30px rgba(59,130,246,0.5), 0 0 60px rgba(59,130,246,0.2); }
+        }
 
         .animate-float      { animation: float 9s ease-in-out infinite; }
         .animate-slide-down { animation: slideDown 0.5s cubic-bezier(0.16,1,0.3,1) both; }
         .animate-fade-up    { animation: fadeUp 0.7s cubic-bezier(0.16,1,0.3,1) both; }
         .dot-pulse          { animation: pulse-dot 2.5s ease-in-out infinite; }
         .cursor-blink       { animation: blink 1.1s step-end infinite; }
+        .glow-pulse         { animation: glow-pulse 3s ease-in-out infinite; }
 
         .delay-1 { animation-delay:0.1s; }
         .delay-2 { animation-delay:0.2s; }
@@ -132,22 +143,58 @@
             backdrop-filter: blur(12px);
             border: 1px solid rgba(59,130,246,0.12);
             transition: all 0.4s cubic-bezier(0.16,1,0.3,1);
+            position: relative;
+        }
+        .cyber-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            padding: 1px;
+            background: linear-gradient(135deg, rgba(59,130,246,0.3), transparent, rgba(6,182,212,0.2));
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0;
+            transition: opacity 0.4s ease;
         }
         .cyber-card:hover {
-            transform: translateY(-6px);
+            transform: translateY(-8px);
+            border-color: rgba(59,130,246,0.3);
+        }
+        .cyber-card:hover::before {
+            opacity: 1;
         }
 
         /* ── Card image ── */
-        .card-img-wrap { position:relative; overflow:hidden; }
+        .card-img-wrap { 
+            position:relative; 
+            overflow:hidden;
+        }
+        .card-img-wrap::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 100%;
+            background: linear-gradient(180deg, 
+                transparent 0%, 
+                transparent 40%,
+                rgba(59,130,246,0.05) 50%,
+                transparent 60%,
+                transparent 100%);
+            opacity: 0;
+            pointer-events: none;
+        }
         .card-img-wrap img {
-            opacity: 0.45;
+            opacity: 1;
             transition: opacity 0.6s ease, transform 0.7s cubic-bezier(0.16,1,0.3,1);
         }
         .cyber-card:hover .card-img-wrap img {
-            opacity: 0.65;
-            transform: scale(1.07);
+            opacity: 0.75;
+            transform: scale(1.05);
         }
-
         .cyber-card:hover .card-img-wrap::after {
             animation: scanline 1.5s ease-in-out;
         }
@@ -198,42 +245,220 @@
             font-weight:700;
         }
 
-        /* ── Platform badge on card ── */
-        .platform-badge {
-            position:absolute; top:0.875rem; left:0.875rem;
-            padding: 0.25rem 0.6rem;
-            background: rgba(10,6,18,0.75);
-            backdrop-filter: blur(8px);
-            border: 1px solid rgba(59,130,246,0.3);
-            border-radius: 0.4rem;
-            font-size:0.6rem;
+        /* ── Difficulty badge ── */
+        .difficulty-badge {
+            position:absolute; 
+            top:0.875rem; 
+            right:0.875rem;
+            padding: 0.35rem 0.7rem;
+            backdrop-filter: blur(12px);
+            border-radius: 0.5rem;
+            font-size:0.65rem;
             font-family:'JetBrains Mono';
             font-weight:700;
             letter-spacing:0.1em;
             text-transform:uppercase;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+        .difficulty-easy {
+            background: rgba(16,185,129,0.15);
+            border: 1px solid rgba(16,185,129,0.3);
+            color: #10b981;
+        }
+        .difficulty-medium {
+            background: rgba(245,158,11,0.15);
+            border: 1px solid rgba(245,158,11,0.3);
+            color: #f59e0b;
+        }
+        .difficulty-hard {
+            background: rgba(239,68,68,0.15);
+            border: 1px solid rgba(239,68,68,0.3);
+            color: #ef4444;
+        }
+
+        /* ── Platform badge ── */
+        .platform-badge {
+            position:absolute; 
+            top:0.875rem; 
+            left:0.875rem;
+            padding: 0.35rem 0.7rem;
+            background: rgba(10,6,18,0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(59,130,246,0.3);
+            border-radius: 0.5rem;
+            font-size:0.65rem;
+            font-family:'JetBrains Mono';
+            font-weight:700;
+            letter-spacing:0.12em;
+            text-transform:uppercase;
+            color: var(--accent-light);
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        /* ── Info row ── */
+        .info-row {
+            display: flex;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+        .info-item {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.3rem 0.6rem;
+            background: rgba(59,130,246,0.05);
+            border: 1px solid rgba(59,130,246,0.15);
+            border-radius: 0.4rem;
+            font-size: 0.65rem;
+            font-family: 'JetBrains Mono';
+            color: #9ca3af;
+        }
+        .info-item i {
+            color: var(--accent-light);
+            font-size: 0.7rem;
+        }
+
+        /* ── Button group ── */
+        .btn-group {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.75rem;
+            margin-top: auto;
+        }
+
+        /* ── Primary button ── */
+        .btn-primary {
+            position: relative;
+            padding: 0.875rem 1.25rem;
+            background: linear-gradient(135deg, rgba(59,130,246,0.2), rgba(29,78,216,0.2));
+            border: 1px solid rgba(59,130,246,0.4);
+            border-radius: 0.75rem;
+            font-size: 0.7rem;
+            font-family: 'JetBrains Mono';
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: #fff;
+            transition: all 0.3s cubic-bezier(0.16,1,0.3,1);
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(59,130,246,0.4), rgba(29,78,216,0.4));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            border-color: rgba(59,130,246,0.6);
+            box-shadow: 0 8px 24px rgba(59,130,246,0.25);
+        }
+        .btn-primary:hover::before {
+            opacity: 1;
+        }
+        .btn-primary i,
+        .btn-primary span {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ── Secondary button ── */
+        .btn-secondary {
+            position: relative;
+            padding: 0.875rem 1.25rem;
+            background: rgba(18,32,46,0.6);
+            border: 1px solid rgba(59,130,246,0.25);
+            border-radius: 0.75rem;
+            font-size: 0.7rem;
+            font-family: 'JetBrains Mono';
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: #9ca3af;
+            transition: all 0.3s cubic-bezier(0.16,1,0.3,1);
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+        .btn-secondary::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(59,130,246,0.1);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .btn-secondary:hover {
+            transform: translateY(-2px);
+            border-color: rgba(59,130,246,0.4);
+            color: #fff;
+        }
+        .btn-secondary:hover::before {
+            opacity: 1;
+        }
+        .btn-secondary i,
+        .btn-secondary span {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ── Tags ── */
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+            margin-bottom: 1rem;
+        }
+        .tag {
+            padding: 0.25rem 0.6rem;
+            background: rgba(59,130,246,0.08);
+            border: 1px solid rgba(59,130,246,0.2);
+            border-radius: 0.3rem;
+            font-size: 0.6rem;
+            font-family: 'JetBrains Mono';
+            font-weight: 600;
+            color: #60a5fa;
+            letter-spacing: 0.05em;
+        }
+
+        /* ── Stats overlay ── */
+        .stats-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 0.875rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            opacity: 1;
+            transition: opacity 0.3s ease;
+        }
+        .stat-item {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            font-size: 0.65rem;
+            font-family: 'JetBrains Mono';
+            color: #9ca3af;
+            font-weight: 600;
+        }
+        .stat-item i {
             color: var(--accent-light);
         }
-
-        /* ── Card index number ── */
-        .card-index {
-            position:absolute; top:0.875rem; right:0.875rem;
-            font-family:'JetBrains Mono'; font-size:0.6rem;
-            color: rgba(255,255,255,0.15); font-weight:700;
-            letter-spacing:0.05em;
-        }
-
-        /* ── Button shimmer ── */
-        .btn-shimmer {
-            position:relative; overflow:hidden;
-            transition: all 0.3s ease;
-        }
-        .btn-shimmer::before {
-            content:''; position:absolute; inset:0;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.06), transparent);
-            transform:translateX(-100%);
-            transition: transform 0.4s ease;
-        }
-        .btn-shimmer:hover::before { transform:translateX(100%); }
 
         @media (prefers-reduced-motion: reduce) {
             *, *::before, *::after {
@@ -284,16 +509,32 @@
             <div class="animate-fade-up delay-1 mb-5">
                 <span class="inline-flex items-center gap-2 px-3 py-1 bg-accent/10 border border-accent/25 rounded-full text-accent text-xs font-mono tracking-widest">
                     <span class="w-1 h-1 bg-accent rounded-full"></span>
-                    Ultima máquina añadida: 18/02/2026
+                    Última máquina añadida: 26/02/2026
                 </span>
             </div>
 
             <h1 class="font-display text-4xl md:text-6xl font-black tracking-tight mb-4 animate-fade-up delay-2">
                 ALHERRERO <span class="gradient-text">MÁQUINAS</span>
             </h1>
-            <p class="text-gray-400 text-sm md:text-base leading-relaxed max-w-2xl mb-0 font-sans animate-fade-up delay-3">
-                Repositorio de máquinas vulnerables diseñadas para el aprendizaje y la práctica de pentesting.
+            <p class="text-gray-400 text-sm md:text-base leading-relaxed max-w-2xl mb-6 font-sans animate-fade-up delay-3">
+                Repositorio de máquinas vulnerables diseñadas para el aprendizaje y la práctica de pentesting. Cada máquina incluye acceso directo a Vulnyx y writeup oficial detallado.
             </p>
+
+            <!-- Stats -->
+            <div class="flex flex-wrap gap-2 animate-fade-up delay-4">
+                <div class="info-item">
+                    <i class="fas fa-server"></i>
+                    <span id="totalMachines">— Máquinas</span>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-cube"></i>
+                    <span>Solo disponibles en Vulnyx</span>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-fire"></i>
+                    <span>Dificultad Variable</span>
+                </div>
+            </div>
         </section>
 
         <!-- ── Grid ── -->
@@ -304,9 +545,9 @@
             </div>
 
             <div id="projectsGrid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                <div class="cyber-card h-96 rounded-2xl skeleton"></div>
-                <div class="cyber-card h-96 rounded-2xl skeleton"></div>
-                <div class="cyber-card h-96 rounded-2xl skeleton"></div>
+                <div class="cyber-card h-[540px] rounded-2xl skeleton"></div>
+                <div class="cyber-card h-[540px] rounded-2xl skeleton"></div>
+                <div class="cyber-card h-[540px] rounded-2xl skeleton"></div>
             </div>
 
             <!-- No results -->
@@ -345,6 +586,20 @@
 
         let allProjects = [];
 
+        // Función para obtener el badge de dificultad
+        function getDifficultyBadge(difficulty) {
+            const badges = {
+                'easy': { class: 'difficulty-easy', icon: 'circle', label: 'Fácil' },
+                'medium': { class: 'difficulty-medium', icon: 'circle-half-stroke', label: 'Media' },
+                'hard': { class: 'difficulty-hard', icon: 'circle-exclamation', label: 'Difícil' }
+            };
+            const badge = badges[difficulty] || badges['medium'];
+            return `<div class="difficulty-badge ${badge.class}">
+                <i class="fas fa-${badge.icon}"></i>
+                ${badge.label}
+            </div>`;
+        }
+
         async function fetchProjects() {
             try {
                 const res  = await fetch('projects.json');
@@ -363,9 +618,13 @@
 
         function updateStats() {
             const badge = document.getElementById('totalProjects');
+            const totalMachines = document.getElementById('totalMachines');
             if (badge) {
                 badge.innerHTML = `<span class="w-1.5 h-1.5 bg-accent rounded-full" style="animation:pulse-dot 2.5s ease-in-out infinite"></span> ${allProjects.length} Máquinas`;
                 badge.style.opacity = '1';
+            }
+            if (totalMachines) {
+                totalMachines.textContent = `${allProjects.length} Máquinas`;
             }
         }
 
@@ -391,13 +650,23 @@
                         <img src="${project.imagen}" alt="${project.nombre}"
                              onerror="this.src='https://images.unsplash.com/photo-1558494949-ef010cbdcc51?q=80&w=800'"
                              class="w-full h-full object-cover">
-                        <div class="card-img-overlay"></div>
 
                         <!-- Platform badge -->
-                        <div class="platform-badge">VULNYX</div>
+                        <div class="platform-badge">
+                            <i class="fas fa-shield-halved"></i>
+                            VULNYX
+                        </div>
 
-                        <!-- Index number -->
-                        <div class="card-index">${String(i + 1).padStart(2,'0')}</div>
+                        <!-- Difficulty badge -->
+                        ${getDifficultyBadge(project.difficulty || 'medium')}
+
+                        <!-- Stats overlay -->
+                        <div class="stats-overlay">
+                            <div class="stat-item">
+                                <i class="fas fa-calendar"></i>
+                                <span>${project.fecha || '2026'}</span>
+                            </div>
+                        </div>
                     </div>
 
                     <!-- Body -->
@@ -405,24 +674,57 @@
                         <!-- inner top glow -->
                         <div class="absolute top-0 left-1/2 -translate-x-1/2 w-2/3 h-px bg-gradient-to-r from-transparent via-accent/20 to-transparent pointer-events-none"></div>
 
-                        <h2 class="font-display text-sm font-bold text-white mb-3 tracking-wide group-hover:text-accentLight transition-colors duration-300 leading-snug">
+                        <h2 class="font-display text-base font-bold text-white mb-3 tracking-wide group-hover:text-accentLight transition-colors duration-300 leading-snug">
                             ${project.nombre}
                         </h2>
+
+                        <!-- Tags -->
+                        ${project.tags ? `
+                        <div class="tags-container">
+                            ${project.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
+                        </div>` : ''}
+
+                        <!-- Info -->
+                        ${project.os || project.vulnerabilities ? `
+                        <div class="info-row">
+                            ${project.os ? `
+                            <div class="info-item">
+                                <i class="fab fa-${project.os.toLowerCase()}"></i>
+                                <span>${project.os}</span>
+                            </div>` : ''}
+                            ${project.vulnerabilities ? `
+                            <div class="info-item">
+                                <i class="fas fa-bug"></i>
+                                <span>${project.vulnerabilities} vulns</span>
+                            </div>` : ''}
+                        </div>` : ''}
+
                         <p class="text-gray-500 text-xs leading-relaxed mb-6 flex-grow line-clamp-3 font-mono">
                             ${project.descripcion}
                         </p>
 
-                        <div class="flex gap-3 mt-auto">
-                            ${project.github ? `
-                            <a href="${project.github}" target="_blank"
-                               class="btn-shimmer flex-1 py-2.5 bg-secondary/80 border border-accent/20 rounded-xl text-center text-[9px] font-bold uppercase tracking-widest text-gray-300 hover:border-accent/50 hover:text-white transition-all duration-300">
-                                Acceder
-                            </a>` : ''}
-                            ${project.demo ? `
-                            <a href="${project.demo}" target="_blank"
-                               class="btn-shimmer flex-1 py-2.5 bg-accent/90 hover:bg-accent text-white rounded-xl text-center text-[9px] font-bold uppercase tracking-widest transition-all duration-300 shadow-lg shadow-accent/20">
-                                Exploit →
-                            </a>` : ''}
+                        <!-- Buttons -->
+                        <div class="btn-group">
+                            ${project.writeup ? `
+                            <a href="${project.writeup}" target="_blank"
+                               class="btn-primary group-btn">
+                                <i class="fas fa-book"></i>
+                                <span>Writeup</span>
+                            </a>` : `
+                            <div class="btn-primary opacity-50 cursor-not-allowed">
+                                <i class="fas fa-book"></i>
+                                <span>Writeup</span>
+                            </div>`}
+                            ${project.vulnyx ? `
+                            <a href="${project.vulnyx}" target="_blank"
+                               class="btn-secondary group-btn">
+                                <i class="fas fa-external-link-alt"></i>
+                                <span>Vulnyx</span>
+                            </a>` : `
+                            <div class="btn-secondary opacity-50 cursor-not-allowed">
+                                <i class="fas fa-external-link-alt"></i>
+                                <span>Vulnyx</span>
+                            </div>`}
                         </div>
                     </div>
                 </article>
